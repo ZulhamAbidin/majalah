@@ -17,10 +17,12 @@ if ($item) {
 }
 
 if (requestMethod() == 'POST') {
-    $data = validate(['judul', 'isi']);
+    $data = validate(['judul', 'isi', 'penulis', 'tanggal_publish', 'id_kategori']);
 
     if ($data) {
         $data['isi'] = $_POST['isi'];
+        $data['penulis'] = $_POST['penulis'];
+        $data['tanggal_publish'] = $_POST['tanggal_publish'];
 
         if (File::has('gambar')) {
             $oldGambar = $item['gambar'];
@@ -95,6 +97,35 @@ $hal = 'Berita';
                                             console.error(error);
                                         });
                                 </script>
+
+<div class="mb-3">
+                                    <label for="">Penulis</label>
+                                    <input type="text" value="<?= old('penulis', $item['penulis']) ?>"
+                                        class="form-control" placeholder="Penulis" name="penulis">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tanggal_publish">Tanggal Publish</label>
+                                    <input type="datetime-local" value="<?= date('Y-m-d\TH:i', strtotime($item['tanggal_publish'])) ?>"
+                                        class="form-control" id="tanggal_publish" name="tanggal_publish">
+                                </div>
+
+                                <select class="form-control" id="id_kategori" name="id_kategori">
+                                    <?php
+                                    $sql = "SELECT id_kategori, nama FROM kategori";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $selected = ($row['id_kategori'] == $item['id_kategori']) ? "selected" : "";
+                                            echo "<option value='" . $row['id_kategori'] . "' $selected>" . $row['nama'] . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>Tidak ada kategori tersedia</option>";
+                                    }
+                                    ?>
+                                </select>
+
 
                                 <div class="text-left mt-4">
                                     <button type="submit" class="btn bg-gradient-primary btn-sm">Simpan</button>

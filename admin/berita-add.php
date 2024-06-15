@@ -45,7 +45,6 @@ $hal = "Berita";
 <html lang="en">
 
 <?php partials("head.php") ?>
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -56,6 +55,7 @@ $hal = "Berita";
   <main class="main-content position-relative border-radius-lg ">
 
     <!-- Navbar -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
     <?php partials("nav.php") ?>  
     <!-- End Navbar -->
 
@@ -96,6 +96,7 @@ $hal = "Berita";
                   <input type="datetime-local" class="form-control" id="tanggal_publish" name="tanggal_publish">
                 </div>
 
+                <!-- berita add dalam menampilkan list kategori -->
                 <div class="mb-3 col-6">
                   <label for="id_kategori">Kategori</label>
                   <select class="form-control" id="id_kategori" name="id_kategori">
@@ -119,6 +120,8 @@ $hal = "Berita";
                 <label for="id_kategori">isi</label>
                   <textarea class="form-control mb-3" name="isi" rows="4" cols="5" id="editor"><?= old("isi") ?></textarea>
                 </div>
+
+
                 <script>
                     ClassicEditor
                         .create( document.querySelector( '#editor' ) )
