@@ -4,92 +4,85 @@
 
 require 'admin/function/init.php';
 
+
 $berita = query_select('berita', ["orderby" => "id_berita DESC"]);
 
 ?>
 
-
-
-<style>
-  .shadow-sm {
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, .15);
-  }
-
-  footer {
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    .card-title {
-      font-size: 14px;
-    }
-
-    .card-text {
-      font-size: 12px;
-    }
-
-    footer p {
-      font-size: 10px;
-    }
-  }
-</style>
-<!-- Navbar -->
 <?php require 'Comp/navbar.php'; ?>
-<!-- endnavbar -->
-
-<style>
-  .jumbotron {
-    height: 200px;
-    background: url('assets/img/bg.jpg');
-    background-size: cover;
-    background-position: 0px -300px;
-  }
-
-  .jumbotron h2,
-  .jumbotron h5 {
-    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.35);
-  }
-</style>
-<div class="jumbotron border mt-5">
-  <div class="container pt-5 text-center">
-    <h2 class="display-4 text-white mb-3 ">Berita</h2>
-  </div>
+<div class="col-12">
+    <div class="card welcome-banner bg-blue-800">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="p-4">
+                        <h2 class="text-white">Berita</h2>
+                        <p class="text-white">
+                        Menyajikan berita terkini dari berbagai bidang seperti politik, ekonomi, teknologi,
+                            kesehatan, dan budaya. Kami berkomitmen untuk memberikan informasi yang akurat, mendalam,
+                            dan terpercaya kepada pembaca kami. Dari liputan langsung hingga analisis mendalam,
+                            kami memberikan pandangan yang komprehensif tentang peristiwa global dan lokal yang
+                            mempengaruhi masyarakat.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="img-welcome-banner">
+                        <img src="assets/images/widget/welcome-banner.png" alt="Welcome Banner"
+                            class="img-fluid mt-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- content -->
-<section class="main mt-4 pt-4" id="produk " style="min-height: 88vh;">
-  <div class="container">
-    <h5 class="mb-4 pb-3">Berita Terbaru</h5>
-    <div class="row">
 
-      <?php if ($berita) : ?>
-
-        <?php $i = 0 ?>
-        <?php foreach ($berita as $item) : ?>
-          <div class="col-md-4 col-6 mb-4">
-            <a class="text-decoration-none" href="detail.php?id=<?= $item['id_berita'] ?>">
-              
-            <div class="card shadow border-0">
-              <div style="width:100%; height: 200px; background-size: cover; background-position: center; background-image: url(admin/assets/img/<?= $item['gambar'] ?>);">
-                
-              </div>
-              <div class="card-body" style="height: 150px">
-                <h6 class="card-title  text-dark fw-bold"><?= $item['judul'] ?></h6>
-              </div>
-            </div>
-
-            </a>
-
-          </div>
-          <?php $i++ ?>
-        <?php endforeach; ?>
-      <?php endif; ?>
-
+  <div class="container title mt-5">
+    <div class="row justify-content-center text-center wow fadeInUp animated" data-wow-delay="0.2s"
+      style="visibility: visible; animation-delay: 0.2s;">
+      <div class="col-md-8 col-xl-6">
+        <h2 class="mb-3">Berita Terbaru</h2>
+        <p class="mb-0">Temukan informasi terbaru dan terpercaya dari berbagai bidang di setiap update kami. Dari berita politik hingga teknologi, gaya hidup hingga kesehatan, kami hadir untuk memastikan Anda tetap terhubung dengan dunia.</p>
+      </div>
     </div>
-
   </div>
 
-</section>
-<!-- endContent -->
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+    <?php if ($berita) : ?>
+
+    <?php $i = 0 ?>
+    <?php foreach ($berita as $item) : ?>
+      <?php
+      if ($i > 100) {
+        break;
+      }
+      ?>
+      <div class="col-md-6 col-lg-4">
+        <div class="card">
+          <div class="card-body mt-2">
+            <h5 class="mb-3"><?= $item['judul'] ?></h5>
+            <p class="text-muted"><p class="mb-0"><?= substr($item['isi'], 0, 150) ?></p></p><img class="pt-2" alt="image" src="admin/assets/img/<?= $item['gambar'] ?>" width="100%">
+            <a class="btn btn-light-dark mt-3"
+              href="detail.php?id=<?= $item['id_berita'] ?>">Lihat Detail Berita <i class="ti ti-external-link"></i></a>
+          </div>
+        </div>
+      </div>
+      <?php $i++ ?>
+        <?php endforeach; ?>
+      <?php endif; ?>
+    </div>
+  </div>
+
+  <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+          <div class="my-4 my-sm-5 wow fadeInUp" data-wow-delay="0.4s">
+              <a href="berita.php" class="btn btn-outline-secondary me-2">Lihat Semua Berita</a> 
+            </div>
+        </div>
+      </div>
+  </div>
 
 <?php include 'Comp/footer.php'; ?>

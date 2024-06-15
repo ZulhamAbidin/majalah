@@ -1,100 +1,80 @@
-<?php $halaman = "Majalah Online" ?>
+<?php $halaman = 'Majalah Online'; ?>
 <?php require 'Comp/header.php'; ?>
 <?php
 
 require 'admin/function/init.php';
 
-$majalah = query_select('majalah', ["orderby" => "id_majalah DESC"]);
+$majalah = query_select('majalah', ['orderby' => 'id_majalah DESC']);
 
 ?>
 
 
-
-<style>
-  .shadow-sm {
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, .15);
-  }
-
-  footer {
-    text-align: center;
-  }
-
-  @media (max-width: 576px) {
-    .card-title {
-      font-size: 14px;
-    }
-
-    .card-text {
-      font-size: 12px;
-    }
-
-    footer p {
-      font-size: 10px;
-    }
-  }
-</style>
-<!-- Navbar -->
 <?php require 'Comp/navbar.php'; ?>
-<!-- endnavbar -->
-
-<style>
-  .jumbotron {
-    height: 200px;
-    background: url('assets/img/bg.jpg');
-    background-size: cover;
-    background-position: 0px -300px;
-  }
-
-  .jumbotron h2,
-  .jumbotron h5 {
-    text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.35);
-  }
-</style>
-<div class="jumbotron border mt-5">
-  <div class="container pt-5 text-center">
-    <h2 class="display-4 text-white mb-3 ">Majalah</h2>
-
-
-  </div>
+<div class="col-12">
+    <div class="card welcome-banner bg-blue-800">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="p-4">
+                        <h2 class="text-white">Majalah</h2>
+                        <p class="text-white">
+                            Majalah kami menawarkan berbagai konten yang menarik dan informatif di berbagai bidang,
+                            seperti fashion, teknologi, kesehatan, kuliner, bisnis, wisata, dan pendidikan. Setiap edisi
+                            kami berusaha untuk memberikan informasi terkini, panduan praktis, opini menarik, serta
+                            fitur eksklusif yang akan memperkaya pengetahuan dan pengalaman membaca Anda.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="img-welcome-banner">
+                        <img src="assets/images/widget/welcome-banner.png" alt="Welcome Banner" class="img-fluid mt-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- content -->
-<section class="main mt-4 pt-4" id="produk " style="min-height: 88vh;">
-  <div class="container">
+<section>
+    <div class="container title">
     <div class="d-flex justify-content-between align-items-center mb-4 pb-3">
-      <h5 class="">Majalah Terbaru</h5>
-      <a href="majalah-anda.php" class="btn btn-warning text-white">Majalah Anda</a>
+            <h2 class="">Majalah </h2>
+            <a href="majalah-anda.php" class="btn btn-warning text-white">Majalah Anda</a>
+        </div>
     </div>
-    <div class="row">
+    <div class="container">
+        <div class="row">
 
-      <?php if ($majalah) : ?>
-
-        <?php $i = 0 ?>
-        <?php foreach ($majalah as $item) : ?>
-          <div class="col-md-4 col-6 mb-4">
-            <a class="text-decoration-none" href="majalah-detail.php?id=<?= $item["id_majalah"] ?>">
-              
-            <div class="card shadow border-0">
-              <div style="width:100%; height: 200px; background-size: cover; background-position: center; background-image: url(admin/assets/img/<?= $item['cover'] ?>);">
-                
-              </div>
-              <div class="card-body " style="height: 150px; background: rgba(0, 0, 0, 0);">
-                <h6 class="card-title  text-dark fw-bold"><?= $item['judul'] ?></h6>
-              </div>
+            <?php if ($majalah) : ?>
+            <?php $i = 0; ?>
+            <?php foreach ($majalah as $item) : ?>
+            <?php
+            if ($i > 3) {
+                break;
+            }
+            ?>
+            <div class="col-sm-6 col-xl-4">
+                <div class="card product-card">
+                    <div class="card-img-top">
+                        <a href="majalah-detail.php?id=<?= $item['id_majalah'] ?>">
+                            <img src="admin/assets/img/<?= $item['cover'] ?>" alt="image" class="img-prod img-fluid">
+                        </a>
+                    </div>
+                    <div class="card-body"><a href="majalah-detail.php?id=<?= $item['id_majalah'] ?>">
+                            <p class="prod-content mb-0 text-muted"><?= $item['judul'] ?></p>
+                        </a>
+                        <div class="d-flex align-items-center justify-content-between mt-2">
+                            <h4 class="mb-0 text-truncate">Edisi <b><?= $item['edisi'] ?></b></h4>
+                            <!-- <div class="prod-color"><span class="bg-success"></span> <span class="bg-dark"></span></div> -->
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            </a>
-
-          </div>
-          <?php $i++ ?>
-        <?php endforeach; ?>
-      <?php endif; ?>
-
+            <?php $i++; ?>
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
     </div>
-
-  </div>
-
 </section>
-<!-- endContent -->
 
 <?php include 'Comp/footer.php'; ?>

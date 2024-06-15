@@ -7,24 +7,30 @@ if (!isset($_SESSION[KEY]["login"])) {
 }
 
 $id = get("id");
-$item = query_select("berita", ["where" => "id_berita = '$id'"]);
 
-if ($item) {
-  $item = $item[0];
+$sql = "
+SELECT berita.*, kategori.nama AS nama_kategori 
+FROM berita 
+JOIN kategori ON berita.id_kategori = kategori.id_kategori 
+WHERE berita.id_berita = '$id'
+";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $item = $result->fetch_assoc();
 } else {
-  direct("berita.php");
-  die;
+    direct("berita.php");
+    die;
 }
 
 $hal = "Berita";
- ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <?php partials("head.php") ?>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-
 
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -43,22 +49,20 @@ $hal = "Berita";
           <div class="card " style="min-height: 70vh">
             <div class="card-body">
 
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-2">Detail Berita</h6>
+                <a href="berita.php" class="btn btn-sm bg-gradient-secondary">Kembali</a>
+              </div>
 
-            	<div class="d-flex justify-content-between">
-	              <h6 class="mb-2">Detail Berita</h6>
-            		<a href="berita.php" class="btn btn-sm bg-gradient-secondary">Kembali</a>
-            	</div>
+              <?php alert(); ?>
 
-            	<?php alert(); ?>
-
-            	 <h4><?= $item["judul"] ?></h4>
-
-               <img src="assets/img/<?= $item["gambar"] ?>" class="img-fluid mb-4" alt="">
-
-               <?= $item["isi"] ?>
-
-	            
-            	
+              <img src="assets/img/<?= htmlspecialchars($item["gambar"]) ?>" class="img-fluid mb-4" alt="">
+              <div><?= $item["judul"] ?></div>
+              <div><?= $item["penulis"] ?></div>
+              <div><?= $item["tanggal_publish"] ?></div>
+              <div><?= $item["nama_kategori"] ?></div>
+              <div><?= $item["isi"] ?></div>
+              
             </div>
           </div>
         </div>

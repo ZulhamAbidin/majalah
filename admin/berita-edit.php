@@ -98,7 +98,7 @@ $hal = 'Berita';
                                         });
                                 </script>
 
-<div class="mb-3">
+                                <div class="mb-3">
                                     <label for="">Penulis</label>
                                     <input type="text" value="<?= old('penulis', $item['penulis']) ?>"
                                         class="form-control" placeholder="Penulis" name="penulis">
