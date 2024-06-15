@@ -1,34 +1,30 @@
-<?php $halaman = "Majalah Online" ?>
 <?php
-
+$halaman = "Majalah Online";
 require 'admin/function/init.php';
 
-if (requestMethod() == "POST" )  {
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-  $data = validate(["username", "password"]);
+if (requestMethod() == "POST") {
+    $data = validate(["username", "password"]);
 
-  if ($data) {
+    if ($data) {
+        $username = $data["username"];
+        $password = $data["password"];
 
-    $username = $data["username"];
-    $password = $data["password"];
+        $user = query_select("subscriber", ["where" => "username = '$username' AND password = '$password'"]);
 
-    $user = query_select("subscriber", ["where" => "username = '$username' AND password = '$password'"]);
-
-    if ($user) {
-      setSuccess("Login Berhasil");
-      $_SESSION[KEY]["login"] = $user;
+        if ($user) {
+            setSuccess("Login Berhasil");
+            $_SESSION[KEY]['login'] = $user[0]; // Simpan data pengguna di sesi
+            direct("majalah.php");
+        } else {
+            setError("Username atau Password salah!");
+        }
     } else {
-      setError("Username Atau Password Salah!");  
+        setError("Username dan Password tidak boleh kosong!");
     }
-
-
-
-    direct("login.php");
-
-  } else {
-    setError("Username Dan Password Tidak Boleh Kosong!");
-  }
-
 }
 ?>
 

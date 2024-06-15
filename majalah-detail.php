@@ -1,4 +1,5 @@
 <?php
+session_start();
 $halaman = "Detail Produk";
 ?>
 <?php require 'comp/header.php'; ?>
@@ -6,39 +7,46 @@ $halaman = "Detail Produk";
 <?php
 require 'admin/function/init.php';
 
-$id = get("id");
+// Cek apakah pengguna sudah login
+$isLoggedIn = isset($_SESSION[KEY]['login']['id_sub']);
+$id_sub = $isLoggedIn ? $_SESSION[KEY]['login']['id_sub'] : null;
 
+$id = get("id");
 $majalah = query_select("majalah", ["where" => "id_majalah = '$id'"])[0];
 
-
+// Jika pengguna sudah login, cek apakah pengguna sudah membeli majalah ini
+$hasPurchased = false;
+if ($isLoggedIn) {
+    $penjualan = query_select("penjualan", ["where" => "id_sub = '$id_sub' AND id_majalah = '$id'"]);
+    if (!empty($penjualan)) {
+        $hasPurchased = true;
+    }
+}
 ?>
 
 <?php require 'comp/navbar.php'; ?>
 
 <section class="main mt-3 pt-5">
-
   <div class="container pt-4">
     <div class="card shadow-sm border-0 mt-4 mb-5">
       <div class="card-body p-5">
         <h2 class="mb-4 mt-3">Majalah <?= $majalah["judul"] ?></h2>
-
         <center>
-          <img src="admin/assets/img/<?= $majalah['cover'] ?>" class=" mb-4" alt="" style="width: 100%;">
+          <img src="admin/assets/img/<?= $majalah['cover'] ?>" class="mb-4" alt="" style="width: 100%;">
         </center>
-
         <p>Edisi : <?= $majalah["edisi"] ?></p>
         <p><?= $majalah["desk"] ?></p>
-
-        <a href="majalah-beli.php?id=<?= $id ?>" class="btn btn-sm btn-warning text-white">Beli Majalah</a>
         
-
-
+        <?php if ($isLoggedIn && !$hasPurchased): ?>
+          <a href="majalah-beli.php?id=<?= $id ?>" class="btn btn-sm btn-warning text-white">Beli Majalah</a>
+        <?php elseif (!$isLoggedIn): ?>
+          <a href="login.php" class="btn btn-sm btn-warning text-white">Login untuk Membeli</a>
+        <?php else: ?>
+          <p class="text-success">Anda sudah membeli majalah ini.</p>
+        <?php endif; ?>
       </div>
     </div>
-
   </div>
 </section>
 
-
-
-<?php include 'Comp/footer.php'; ?>
+<?php include 'comp/footer.php'; ?>

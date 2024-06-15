@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 29, 2024 at 01:54 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.12
+-- Host: localhost:3306
+-- Generation Time: Jun 14, 2024 at 05:23 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.2.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,18 +28,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id_admin` int(11) NOT NULL,
+  `id_admin` int NOT NULL,
   `nama` varchar(100) NOT NULL DEFAULT '0',
   `password` varchar(50) NOT NULL DEFAULT '0',
   `email` varchar(50) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `nama`, `password`, `email`) VALUES
-(2, 'Administrator', '123', 'admin@gmail.com');
+(2, 'admin', 'admin', 'admin@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -48,11 +48,11 @@ INSERT INTO `admin` (`id_admin`, `nama`, `password`, `email`) VALUES
 --
 
 CREATE TABLE `berita` (
-  `id_berita` int(11) NOT NULL,
+  `id_berita` int NOT NULL,
   `judul` varchar(200) NOT NULL DEFAULT '0',
   `gambar` varchar(100) NOT NULL DEFAULT '0',
   `isi` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `berita`
@@ -72,16 +72,17 @@ INSERT INTO `berita` (`id_berita`, `judul`, `gambar`, `isi`) VALUES
 --
 
 CREATE TABLE `kategori` (
-  `id_kategori` int(11) NOT NULL,
+  `id_kategori` int NOT NULL,
   `nama` varchar(100) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama`) VALUES
-(1, 'Kategori 2');
+(1, 'Kategori 2'),
+(3, 'cek tambah kategori');
 
 -- --------------------------------------------------------
 
@@ -90,22 +91,23 @@ INSERT INTO `kategori` (`id_kategori`, `nama`) VALUES
 --
 
 CREATE TABLE `majalah` (
-  `id_majalah` int(11) NOT NULL,
+  `id_majalah` int NOT NULL,
   `judul` varchar(200) DEFAULT NULL,
   `edisi` varchar(50) DEFAULT NULL,
-  `desk` text DEFAULT NULL,
-  `harga` int(11) DEFAULT NULL,
+  `desk` text,
   `isi` varchar(50) DEFAULT NULL,
-  `cover` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `cover` varchar(50) DEFAULT NULL,
+  `harga_digital` int DEFAULT NULL,
+  `harga_cetak` int DEFAULT NULL,
+  `harga_keduanya` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `majalah`
 --
 
-INSERT INTO `majalah` (`id_majalah`, `judul`, `edisi`, `desk`, `harga`, `isi`, `cover`) VALUES
-(2, 'Coba Edit', 'kasnd 123n Edit', 'asckan kankn jkn dknasjkdnkjasnd s', 100000, '1716360383OwUthcb78O.pdf', '1716360403TGEpOnpgbP.jpg'),
-(3, 'Coba Lagi', 'asjdnjk sadasd', 'sadsndk ajd asjdb jab djhasasd kas dias djasb djasbdjas djas jdbasjhdbas', 120000, '1716358727jHIRz5rr4C.pdf', '1716358727YtK7NlCHaL.jpg');
+INSERT INTO `majalah` (`id_majalah`, `judul`, `edisi`, `desk`, `isi`, `cover`, `harga_digital`, `harga_cetak`, `harga_keduanya`) VALUES
+(5, 'Sejarah Singkat HME FT UNM edit', 'Edisi', 'deksripsi', '1718367380ydjLORvF5e.pdf', '1718367380m0TlUVHrWW.jpg', 120000, 1200000, 11200000);
 
 -- --------------------------------------------------------
 
@@ -114,14 +116,23 @@ INSERT INTO `majalah` (`id_majalah`, `judul`, `edisi`, `desk`, `harga`, `isi`, `
 --
 
 CREATE TABLE `penjualan` (
-  `id_p` int(11) NOT NULL,
-  `id_sub` int(11) NOT NULL DEFAULT 0,
-  `id_majalah` int(11) NOT NULL DEFAULT 0,
-  `harga` int(11) NOT NULL DEFAULT 0,
-  `status_pembayaran` int(11) NOT NULL DEFAULT 0,
+  `id_p` int NOT NULL,
+  `id_sub` int NOT NULL DEFAULT '0',
+  `id_majalah` int NOT NULL DEFAULT '0',
+  `harga` int NOT NULL DEFAULT '0',
+  `status_pembayaran` int NOT NULL DEFAULT '0',
   `bukti_pembayaran` varchar(50) NOT NULL DEFAULT '0',
-  `tgl_penjualan` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `tgl_penjualan` date NOT NULL,
+  `metode_pembayaran` varchar(50) DEFAULT NULL,
+  `no_transaksi` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `penjualan`
+--
+
+INSERT INTO `penjualan` (`id_p`, `id_sub`, `id_majalah`, `harga`, `status_pembayaran`, `bukti_pembayaran`, `tgl_penjualan`, `metode_pembayaran`, `no_transaksi`) VALUES
+(28, 5, 5, 11200000, 2, '17183835103efjx3mYpa.jpg', '2024-06-14', 'BNI', 'BNI-28-14062024-MHDQH853');
 
 -- --------------------------------------------------------
 
@@ -130,7 +141,7 @@ CREATE TABLE `penjualan` (
 --
 
 CREATE TABLE `subscriber` (
-  `id_sub` int(11) NOT NULL,
+  `id_sub` int NOT NULL,
   `nama` varchar(200) NOT NULL DEFAULT '0',
   `alamat` varchar(200) NOT NULL DEFAULT '0',
   `email` varchar(50) NOT NULL DEFAULT '0',
@@ -138,14 +149,16 @@ CREATE TABLE `subscriber` (
   `pic` varchar(50) NOT NULL DEFAULT '0',
   `username` varchar(50) NOT NULL DEFAULT '0',
   `password` varchar(50) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `subscriber`
 --
 
 INSERT INTO `subscriber` (`id_sub`, `nama`, `alamat`, `email`, `no_telp`, `pic`, `username`, `password`) VALUES
-(3, 'Risa Harahap', 'Jakarta Selatan', 'risa@gmail.com', '12312312', '213123', 'risa', '123');
+(3, 'Risa Harahap', 'Jakarta Selatan', 'risa@gmail.com', '12312312', '213123', 'risa', '123'),
+(4, 'ZulhamAbidin', 'BTN NUKI DWIKARYA PERMAI', 'zlhm378@gmail.com', '0895801138822', 'pic zlhm.a', 'pengunjung', 'pengunjung'),
+(5, 'Zulham Abidin, S.Pd., Gr.', 'Universitas Negeri Makassar', 'pengunjungastri@gmail.com', '0895801138822', 'Lorem', 'pengunjungastri', 'pengunjungastri');
 
 -- --------------------------------------------------------
 
@@ -154,9 +167,16 @@ INSERT INTO `subscriber` (`id_sub`, `nama`, `alamat`, `email`, `no_telp`, `pic`,
 --
 
 CREATE TABLE `tag` (
-  `id_tag` int(11) NOT NULL,
+  `id_tag` int NOT NULL,
   `nama` varchar(50) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tag`
+--
+
+INSERT INTO `tag` (`id_tag`, `nama`) VALUES
+(2, 'tambah tag');
 
 --
 -- Indexes for dumped tables
@@ -212,43 +232,43 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `berita`
 --
 ALTER TABLE `berita`
-  MODIFY `id_berita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_berita` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `majalah`
 --
 ALTER TABLE `majalah`
-  MODIFY `id_majalah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_majalah` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_p` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `subscriber`
 --
 ALTER TABLE `subscriber`
-  MODIFY `id_sub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_sub` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id_tag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tag` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

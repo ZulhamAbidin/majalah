@@ -3,7 +3,8 @@ $halaman = 'Detail Produk';
 require 'comp/header.php';
 require 'admin/function/init.php';
 
-if (!isset($_SESSION[KEY]['login'])) {
+// Cek apakah pengguna sudah login
+if (!isset($_SESSION[KEY]['login']['id_sub'])) {
     setError('Silahkan Login Terlebih Dahulu!');
     direct('login.php');
 }
@@ -15,6 +16,10 @@ if (!$majalah) {
     setError('Majalah tidak ditemukan.');
     direct('index.php');
 }
+
+$id_sub = $_SESSION[KEY]['login']['id_sub'];
+$penjualan = query_select("penjualan", ["where" => "id_sub = '$id_sub' AND id_majalah = '$id'"]);
+$hasPurchased = !empty($penjualan);
 ?>
 
 <?php require 'comp/navbar.php'; ?>
@@ -30,7 +35,7 @@ if (!$majalah) {
                         </center>
                         <h5>Harga Digital : <?= rp($majalah['harga_digital']) ?><br>
                             Harga Cetak : <?= rp($majalah['harga_cetak']) ?>, <br>
-                            Harga Cetak dan Digital :  <?= rp($majalah['harga_keduanya']) ?></h5>
+                            Harga Cetak dan Digital : <?= rp($majalah['harga_keduanya']) ?></h5>
                         <p>Edisi : <?= $majalah['edisi'] ?></p>
                         <p><?= $majalah['desk'] ?></p>
                     </div>
@@ -41,24 +46,29 @@ if (!$majalah) {
                         <table border="0">
                             <tr>
                                 <td>Nama</td>
-                                <td><?= $_SESSION[KEY]['login'][0]['nama'] ?></td>
+                                <td><?= $_SESSION[KEY]['login']['nama'] ?></td>
                             </tr>
                             <tr>
                                 <td>Alamat</td>
-                                <td><?= $_SESSION[KEY]['login'][0]['alamat'] ?></td>
+                                <td><?= $_SESSION[KEY]['login']['alamat'] ?></td>
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td><?= $_SESSION[KEY]['login'][0]['email'] ?></td>
+                                <td><?= $_SESSION[KEY]['login']['email'] ?></td>
                             </tr>
                             <tr>
                                 <td>No. Telp</td>
-                                <td><?= $_SESSION[KEY]['login'][0]['no_telp'] ?></td>
+                                <td><?= $_SESSION[KEY]['login']['no_telp'] ?></td>
                             </tr>
                         </table>
-                        <a href="beli.php?id=<?= $id ?>&jenis=digital&id_sub=<?= $_SESSION[KEY]['login'][0]['id_sub'] ?>" class="mt-3 btn btn-success">Majalah Digital</a>
-                        <a href="beli.php?id=<?= $id ?>&jenis=cetak&id_sub=<?= $_SESSION[KEY]['login'][0]['id_sub'] ?>" class="mt-3 btn btn-success">Majalah Cetak Fisik</a>
-                        <a href="beli.php?id=<?= $id ?>&jenis=keduanya&id_sub=<?= $_SESSION[KEY]['login'][0]['id_sub'] ?>" class="mt-3 btn btn-success">Majalah Cetak Dan Digital</a>
+
+                        <?php if (!$hasPurchased): ?>
+                            <a href="beli.php?id=<?= $id ?>&jenis=digital&id_sub=<?= $id_sub ?>" class="mt-3 btn btn-success">Majalah Digital</a>
+                            <a href="beli.php?id=<?= $id ?>&jenis=cetak&id_sub=<?= $id_sub ?>" class="mt-3 btn btn-success">Majalah Cetak Fisik</a>
+                            <a href="beli.php?id=<?= $id ?>&jenis=keduanya&id_sub=<?= $id_sub ?>" class="mt-3 btn btn-success">Majalah Cetak Dan Digital</a>
+                        <?php else: ?>
+                            <p class="text-success mt-3">Anda sudah membeli majalah ini.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
