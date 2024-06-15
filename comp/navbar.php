@@ -9,6 +9,7 @@
         <a class="nav-item nav-link" href="index.php">Beranda</a>
         <a class="nav-item nav-link" href="about.php">About</a>
         <a class="nav-item nav-link" href="berita.php">News</a>
+        <a class="nav-item nav-link" href="schedules.php">Daftar Jadwal</a>
 
         <a href="index.php" class="text-white ms-3 me-3" style="transform: translateY(3px); text-decoration: none">
           <h4 class="fw-bolder " style="text-transform: uppercase; ">Majalah Online</h4>

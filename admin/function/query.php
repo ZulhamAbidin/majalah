@@ -1,3 +1,5 @@
+<!-- queri.php -->
+
 <?php
 
 use function PHPSTORM_META\type;

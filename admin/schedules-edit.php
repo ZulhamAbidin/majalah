@@ -133,65 +133,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="col-lg-12 mb-lg-0 mb-4">
                     <div class="card " style="min-height: 70vh">
                         <div class="card-body">
-                            <h6 class="mb-4">Edit Schedules</h6>
+                            <h6 class="mb-4">Edit Daftar Jadwal</h6>
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . htmlspecialchars($id_schedules); ?>" method="POST">
                                 <input type="hidden" name="id_schedules" value="<?php echo htmlspecialchars($id_schedules); ?>">
                                 <div class="mb-3">
-                                    <label for="carrierName" class="form-label">Carrier Name</label>
+                                    <label for="carrierName" class="form-label">Nama Pengangkut</label>
                                     <input type="text" class="form-control" id="carrierName" name="carrierName" required value="<?php echo htmlspecialchars($carrierName); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="vesselName" class="form-label">Vessel Name</label>
+                                    <label for="vesselName" class="form-label">Nama Kapal</label>
                                     <input type="text" class="form-control" id="vesselName" name="vesselName" required value="<?php echo htmlspecialchars($vesselName); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="voyageNumber" class="form-label">Voyage Number</label>
+                                    <label for="voyageNumber" class="form-label">Nomor Perjalanan</label>
                                     <input type="text" class="form-control" id="voyageNumber" name="voyageNumber" value="<?php echo htmlspecialchars($voyageNumber); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tradeLine" class="form-label">Trade Line</label>
+                                    <label for="tradeLine" class="form-label">Jalur Perdagangan</label>
                                     <input type="text" class="form-control" id="tradeLine" name="tradeLine" value="<?php echo htmlspecialchars($tradeLine); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="portCodeOrigin" class="form-label">Port Code Origin</label>
+                                    <label for="portCodeOrigin" class="form-label">Kode Pelabuhan Asal</label>
                                     <input type="text" class="form-control" id="portCodeOrigin" name="portCodeOrigin" value="<?php echo htmlspecialchars($portCodeOrigin); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="departureDate" class="form-label">Departure Date</label>
+                                    <label for="departureDate" class="form-label">Tanggal Keberangkatan</label>
                                     <input type="date" class="form-control" id="departureDate" name="departureDate" value="<?php echo htmlspecialchars($departureDate); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="transhipment" class="form-label">Transhipment</label>
+                                    <label for="transhipment" class="form-label">Pengangkutan Ulang</label>
                                     <input type="text" class="form-control" id="transhipment" name="transhipment" value="<?php echo htmlspecialchars($transhipment); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="transhipmentDeparture" class="form-label">Transhipment Departure</label>
+                                    <label for="transhipmentDeparture" class="form-label">Tanggal Keberangkatan Transhipment</label>
                                     <input type="date" class="form-control" id="transhipmentDeparture" name="transhipmentDeparture" value="<?php echo htmlspecialchars($transhipmentDeparture); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="portCodeDestination" class="form-label">Port Code Destination</label>
+                                    <label for="portCodeDestination" class="form-label">Kode Pelabuhan Tujuan</label>
                                     <input type="text" class="form-control" id="portCodeDestination" name="portCodeDestination" value="<?php echo htmlspecialchars($portCodeDestination); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="arrivalDate" class="form-label">Arrival Date</label>
+                                    <label for="arrivalDate" class="form-label">Tanggal Kedatangan</label>
                                     <input type="date" class="form-control" id="arrivalDate" name="arrivalDate" value="<?php echo htmlspecialchars($arrivalDate); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="duration" class="form-label">Duration</label>
+                                    <label for="duration" class="form-label">Durasi</label>
                                     <input type="text" class="form-control" id="duration" name="duration" value="<?php echo htmlspecialchars($duration); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="forwarder" class="form-label">Forwarder</label>
+                                    <label for="forwarder" class="form-label">Eksportir</label>
                                     <input type="text" class="form-control" id="forwarder" name="forwarder" value="<?php echo htmlspecialchars($forwarder); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="berthingTerminal" class="form-label">Berthing Terminal</label>
+                                    <label for="berthingTerminal" class="form-label">Terminal Berlabuh</label>
                                     <input type="text" class="form-control" id="berthingTerminal" name="berthingTerminal" value="<?php echo htmlspecialchars($berthingTerminal); ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="requestQuote" class="form-label">Request Quote</label>
+                                    <label for="requestQuote" class="form-label">Permintaan Penawaran</label>
                                     <textarea class="form-control" id="requestQuote" name="requestQuote" rows="3"><?php echo htmlspecialchars($requestQuote); ?></textarea>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="schedules.php" class="btn btn-secondary">Cancel</a>
                             </form>

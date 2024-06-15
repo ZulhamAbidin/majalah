@@ -1,3 +1,5 @@
+<!-- ini adalah berita-add.php -->
+
 <?php 
 require_once "function/init.php";
 
@@ -8,7 +10,8 @@ if (!isset($_SESSION[KEY]["login"])) {
 
 if (requestMethod() == "POST" )  {
 
-	$data = validate(["judul", "isi"]);
+	// $data = validate(["judul", "isi"]);
+  $data = validate(["judul", "isi", "penulis", "tanggal_publish", "id_kategori"]);
 
 	if ($data && File::has("gambar")) {
 
@@ -71,19 +74,51 @@ $hal = "Berita";
             	<?php alert(); ?>
 
             	 <form role="form" method="POST" enctype="multipart/form-data">
+              <div class="row">
 
-                <div class="mb-3">
+                <div class="mb-3 col-4">
                 	<label for="">Judul</label>
-                  <input type="text" value="<?= old("judul") ?>" class="form-control" placeholder="Judul" name="judul">
+                  <input type="text" value="" class="form-control" placeholder="Judul" name="judul">
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3 col-4">
                   <label for="">Gambar</label>
-                  <input type="file" value="<?= old("gambar") ?>" class="form-control" placeholder="gambar" name="gambar">
+                  <input type="file" value="" class="form-control" placeholder="gambar" name="gambar">
                 </div>
 
-                <textarea class="form-control mb-3" name="isi" rows="4" cols="5" id="editor"><?= old("isi") ?></textarea>
+                <div class="mb-3 col-4">
+                	<label for="">penulis</label>
+                  <input type="text" value="" class="form-control" placeholder="penulis" name="penulis">
+                </div>
 
+                <div class="mb-3 col-6">
+                	<label for="tanggal_publish">tanggal publish</label>
+                  <input type="datetime-local" class="form-control" id="tanggal_publish" name="tanggal_publish">
+                </div>
+
+                <div class="mb-3 col-6">
+                  <label for="id_kategori">Kategori</label>
+                  <select class="form-control" id="id_kategori" name="id_kategori">
+                      <?php
+                    
+                      $sql = "SELECT id_kategori, nama FROM kategori";
+                      $result = $conn->query($sql);
+
+                      if ($result->num_rows > 0) {
+                          while ($row = $result->fetch_assoc()) {
+                              echo "<option value='" . $row['id_kategori'] . "'>" . $row['nama'] . "</option>";
+                          }
+                      } else {
+                          echo "<option value=''>Tidak ada kategori tersedia</option>";
+                      }
+                      ?>
+                  </select>
+                </div>
+
+                <div class="mb-3 col-12">
+                <label for="id_kategori">isi</label>
+                  <textarea class="form-control mb-3" name="isi" rows="4" cols="5" id="editor"><?= old("isi") ?></textarea>
+                </div>
                 <script>
                     ClassicEditor
                         .create( document.querySelector( '#editor' ) )
@@ -91,13 +126,11 @@ $hal = "Berita";
                             console.error( error );
                         } );
                 </script>
-
-
                
                 <div class="text-left mt-4">
                   <button type="submit" class="btn bg-gradient-primary btn-sm">Tambah</button>
                 </div>
-
+                </div>
               </form>
 
 	            
