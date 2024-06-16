@@ -77,6 +77,9 @@ $majalah = query_select('majalah', ["orderby" => "id_majalah DESC", "limit" => "
   <div class="container">
     <div class="row">
 
+   
+
+
     <?php if ($majalah) : ?>
     <?php $i = 0 ?>
     <?php foreach ($majalah as $item) : ?>
@@ -120,7 +123,7 @@ $majalah = query_select('majalah', ["orderby" => "id_majalah DESC", "limit" => "
       <div class="row justify-content-center">
         <div class="col-md-12 text-center">
           <div class="my-4 my-sm-5 wow fadeInUp" data-wow-delay="0.4s">
-              <a href="berita.php" class="btn btn-outline-secondary me-2">Lihat Semua  </a> 
+              <a href="majalah.php" class="btn btn-outline-secondary me-2">Lihat Semua  </a> 
             </div>
         </div>
       </div>

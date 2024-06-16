@@ -7,14 +7,12 @@ $halaman = "Detail Produk";
 <?php
 require 'admin/function/init.php';
 
-// Cek apakah pengguna sudah login
 $isLoggedIn = isset($_SESSION[KEY]['login']['id_sub']);
 $id_sub = $isLoggedIn ? $_SESSION[KEY]['login']['id_sub'] : null;
 
 $id = get("id");
 $majalah = query_select("majalah", ["where" => "id_majalah = '$id'"])[0];
 
-// Jika pengguna sudah login, cek apakah pengguna sudah membeli majalah ini
 $hasPurchased = false;
 if ($isLoggedIn) {
     $penjualan = query_select("penjualan", ["where" => "id_sub = '$id_sub' AND id_majalah = '$id'"]);

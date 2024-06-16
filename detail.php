@@ -6,36 +6,68 @@ require "phpqrcode/qrlib.php";
 
 <?php
 require 'admin/function/init.php';
-
 $id = get("id");
-
 $berita = query_select("berita", ["where" => "id_berita = '$id'"])[0];
-
 
 ?>
 
 <?php require 'comp/navbar.php'; ?>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sticky-md-top product-sticky">
+                <div id="carouselExampleCaptions" class="carousel slide ecomm-prod-slider" data-bs-ride="carousel">
+                  <div class="carousel-inner bg-light rounded position-relative">
+                    <div class="card-body position-absolute bottom-0 end-0">
+                      <ul class="list-inline ms-auto mb-0 prod-likes">
+                        <li class="list-inline-item m-0"><a href="#"
+                            class="avtar avtar-xs text-white text-hover-primary"><i class="ti ti-zoom-in f-18"></i></a>
+                        </li>
+                        <li class="list-inline-item m-0"><a href="#"
+                            class="avtar avtar-xs text-white text-hover-primary"><i class="ti ti-zoom-out f-18"></i></a>
+                        </li>
+                        <li class="list-inline-item m-0"><a href="#"
+                            class="avtar avtar-xs text-white text-hover-primary"><i
+                              class="ti ti-rotate-clockwise f-18"></i></a></li>
+                      </ul>
+                    </div>
+                    <div class=""><img src="admin/assets/img/<?= $berita['gambar'] ?>"
+                        class="" alt="Product images" width="100%"></div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
 
-<section class="main mt-3 pt-5">
+            <div class="col-md-6"><span class="badge bg-success f-14">Berita </span>
+              <h5 class="my-3"><?= $berita["judul"] ?></h5>
+              <h5 class="mt-4 mb-3">Penulis <?= $berita["penulis"] ?>  <?= formatTanggal($berita["tanggal_publish"]) ?></h5>
+              <p><?= $berita["isi"] ?></p>
+            </div>
 
-  <div class="container pt-4">
-    <div class="card shadow-sm border-0 mt-4 mb-5">
-      <div class="card-body p-5">
-        <h2 class="mb-4 mt-3"><?= $berita["judul"] ?></h2>
-
-        <center>
-          <img src="admin/assets/img/<?= $berita['gambar'] ?>" class=" mb-4" alt="" style="width: 100%;">
-        </center>
-
-        <?= $berita["isi"] ?>
-
-
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
-</section>
 
 
+  <?php
+// Fungsi untuk format tanggal ke "Tanggal Diunggah dd-mm-yyyy Pukul HH:ii:ss"
+function formatTanggal($tanggal)
+{
+    // Ubah format tanggal ke timestamp
+    $timestamp = strtotime($tanggal);
+    
+    // Format tanggal ke "Tanggal Diunggah dd-mm-yyyy Pukul HH:ii:ss"
+    $formatted_date = date('d-m-Y', $timestamp);
+    $formatted_time = date('H:i:s', $timestamp);
+
+    return "Tanggal Diunggah {$formatted_date} Pukul {$formatted_time}";
+}
+?>
 
 <?php include 'Comp/footer.php'; ?>

@@ -1,16 +1,9 @@
 <?php $halaman = 'Majalah Online'; ?>
+<?php require 'admin/function/init.php'; ?>
 <?php require 'Comp/header.php'; ?>
-<?php
-
-require 'admin/function/init.php';
-
-$majalah = query_select('majalah', ['orderby' => 'id_majalah DESC']);
-
-?>
-
-
 <?php require 'Comp/navbar.php'; ?>
-<div class="col-12">
+<br>
+<div class="col-12 mt-4">
     <div class="card welcome-banner bg-blue-800">
         <div class="card-body">
             <div class="row">
@@ -36,45 +29,58 @@ $majalah = query_select('majalah', ['orderby' => 'id_majalah DESC']);
 </div>
 
 <section>
+    <div class="container mt-4 mb-4">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <form class="d-flex w-100" id="searchForm">
+                    <input class="form-control me-2 flex-grow-1" type="search" placeholder="Cari majalah..." aria-label="Search" id="searchInput" name="query">
+                    <button class="btn btn-outline-primary" type="submit">Cari</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="container title">
-    <div class="d-flex justify-content-between align-items-center mb-4 pb-3">
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-3">
             <h2 class="">Majalah </h2>
             <a href="majalah-anda.php" class="btn btn-warning text-white">Majalah Anda</a>
         </div>
     </div>
     <div class="container">
-        <div class="row">
-
-            <?php if ($majalah) : ?>
-            <?php $i = 0; ?>
-            <?php foreach ($majalah as $item) : ?>
-            <?php
-            if ($i > 3) {
-                break;
-            }
-            ?>
-            <div class="col-sm-6 col-xl-4">
-                <div class="card product-card">
-                    <div class="card-img-top">
-                        <a href="majalah-detail.php?id=<?= $item['id_majalah'] ?>">
-                            <img src="admin/assets/img/<?= $item['cover'] ?>" alt="image" class="img-prod img-fluid">
-                        </a>
-                    </div>
-                    <div class="card-body"><a href="majalah-detail.php?id=<?= $item['id_majalah'] ?>">
-                            <p class="prod-content mb-0 text-muted"><?= $item['judul'] ?></p>
-                        </a>
-                        <div class="d-flex align-items-center justify-content-between mt-2">
-                            <h4 class="mb-0 text-truncate">Edisi <b><?= $item['edisi'] ?></b></h4>
-                            <!-- <div class="prod-color"><span class="bg-success"></span> <span class="bg-dark"></span></div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php $i++; ?>
-            <?php endforeach; ?>
-            <?php endif; ?>
+        <div class="row" id="majalahList">
         </div>
     </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <?php include 'Comp/footer.php'; ?>
+<script>
+    $(document).ready(function() {
+        function searchMajalah(query) {
+            $.ajax({
+                url: 'search_majalah.php',
+                type: 'GET',
+                data: { query: query },
+                success: function(data) {
+                    $('#majalahList').html(data);
+                }
+            });
+        }
+
+        searchMajalah('');
+
+        $('#searchInput').on('keyup', function() {
+            let query = $(this).val();
+            searchMajalah(query);
+        });
+
+        $('#searchForm').on('submit', function(e) {
+            e.preventDefault();
+            let query = $('#searchInput').val();
+            searchMajalah(query);
+        });
+    });
+</script>
