@@ -1,10 +1,8 @@
 <?php $halaman = "Majalah Online" ?>
 <?php require 'Comp/header.php'; ?>
 <?php require 'admin/function/init.php'; ?>
-
 <?php require 'Comp/navbar.php'; ?>
-<br>
-<div class="col-12 mt-4">
+<div class="col-12">
     <div class="card welcome-banner bg-blue-800">
         <div class="card-body">
             <div class="row">

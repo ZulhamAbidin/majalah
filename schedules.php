@@ -1,64 +1,66 @@
 <?php $halaman = "Majalah Online" ?>
 <?php require 'Comp/header.php'; ?>
-<?php
-require 'admin/function/init.php';
-?>
-
-<?php require 'Comp/navbar.php'; ?>
-<br>
-<div class="col-12 mt-4">
-    <div class="card welcome-banner bg-blue-800">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="p-4">
-                        <h2 class="text-white">Pengiriman</h2>
-                        <p class="text-white">
-                            Produk kami digunakan di berbagai bidang, seperti fashion, teknologi,
-                            kesehatan, kuliner, bisnis, wisata, dan pendidikan. Kami berkomitmen untuk menyajikan
-                            konten yang menarik dan informatif kepada pembaca kami. Dengan fokus pada inovasi
-                            dan kualitas, kami terus mengembangkan solusi yang relevan untuk kebutuhan industri
-                            dan membawa pengalaman yang berharga bagi setiap pengguna produk kami.
-                        </p>
-                        <a href="majalah.php" class="btn btn-outline-light">Lihat Semua Majalah Kami</a>
-                    </div>
-                </div>
-                <div class="col-sm-4 text-center">
-                    <div class="img-welcome-banner">
-                        <img src="assets/images/widget/welcome-banner.png" alt="Welcome Banner"
-                            class="img-fluid mt-4">
+<?php require 'admin/function/init.php';?>
+<?php require 'Comp/navbar.php'; ?> 
+<div class="col-12">
+            <div class="card welcome-banner bg-blue-800">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="p-4">
+                                <h2 class="text-white">Pengiriman</h2>
+                                <p class="text-white">
+                                    Produk kami digunakan di berbagai bidang, seperti fashion, teknologi,
+                                    kesehatan, kuliner, bisnis, wisata, dan pendidikan. Kami berkomitmen untuk menyajikan
+                                    konten yang menarik dan informatif kepada pembaca kami. Dengan fokus pada inovasi
+                                    dan kualitas, kami terus mengembangkan solusi yang relevan untuk kebutuhan industri
+                                    dan membawa pengalaman yang berharga bagi setiap pengguna produk kami.
+                                </p>
+                                <a href="majalah.php" class="btn btn-outline-light">Lihat Semua Majalah Kami</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="img-welcome-banner">
+                                <img src="assets/images/widget/welcome-banner.png" alt="Welcome Banner"
+                                    class="img-fluid mt-4">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<section class="main mt-4 pt-4">
-    <div class="container">
-        <div class="d-flex justify-content-between mb-4">
-            <h6 class="mb-0">Daftar Jadwal</h6>
+<div class="container">
+        <div class="row">
+        
+        <div class="col-12 mt-4">
+            <div class="d-flex justify-content-between mb-4">
+                <h6 class="mb-0">Daftar Jadwal</h6>
+            </div>
         </div>
-                <div class="table-responsive">
-                    <table id="scheduleTable" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama Pengangkut</th>
-                                <th>Nama Kapal</th>
-                                <th>Nomor Perjalanan</th>
-                                <th>Jalur Perdagangan</th>
-                                <th>Tanggal Keberangkatan</th>
-                                <th>Tanggal Kedatangan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-    </div>
-</section>
+
+        <div class="col-12 mt-4">
+            <div class="table-responsive dt-responsive">
+                <table id="scheduleTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Pengangkut</th>
+                            <th>Nama Kapal</th>
+                            <th>Nomor Perjalanan</th>
+                            <th>Jalur Perdagangan</th>
+                            <th>Tanggal Keberangkatan</th>
+                            <th>Tanggal Kedatangan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

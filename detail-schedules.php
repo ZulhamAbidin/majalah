@@ -1,9 +1,7 @@
-<?php 
-require 'admin/function/init.php'; 
+<?php
+require 'admin/function/init.php';
 
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    die("ID tidak ditemukan.");
-}
+$halaman = "Detail Produk";
 
 $id_schedules = $_GET['id'];
 $sql = 'SELECT * FROM schedules WHERE id_schedules = ?';
@@ -16,22 +14,14 @@ $data = $result->fetch_assoc();
 if (!$data) {
     die("Data tidak ditemukan.");
 }
-
 ?>
 
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Schedule</title>
-    <link rel="stylesheet" href="path/to/bootstrap.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">s
-</head>
-<body>
-    <div class="container mt-5">
+<?php require 'comp/header.php'; ?>
+<?php require 'comp/navbar.php'; ?>
+<div class="container">
+<div class="container mt-5">
         <h2>Detail Jadwal</h2>
-        <table class="table table-bordered">
+        <table class="table table-responsive table-bordered">
             <tr>
                 <th>Nama Pengangkut</th>
                 <td><?php echo htmlspecialchars($data['CarrierName']); ?></td>
@@ -91,6 +81,11 @@ if (!$data) {
         </table>
         <a href="schedules.php" class="btn btn-primary">Kembali</a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
-</html>
+  </div>
+</div>
+
+
+
+<?php include 'Comp/footer.php'; ?>
+
+  

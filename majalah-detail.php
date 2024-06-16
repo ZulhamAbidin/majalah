@@ -1,5 +1,4 @@
 <?php
-session_start();
 $halaman = "Detail Produk";
 ?>
 <?php require 'comp/header.php'; ?>
@@ -23,10 +22,8 @@ if ($isLoggedIn) {
 ?>
 
 <?php require 'comp/navbar.php'; ?>
-
-<section class="main mt-3 pt-5">
-  <div class="container pt-4">
-    <div class="card shadow-sm border-0 mt-4 mb-5">
+<div class="container">
+<div class="card shadow-sm border-0 mt-4 mb-5">
       <div class="card-body p-5">
         <h2 class="mb-4 mt-3">Majalah <?= $majalah["judul"] ?></h2>
         <center>
@@ -44,7 +41,5 @@ if ($isLoggedIn) {
         <?php endif; ?>
       </div>
     </div>
-  </div>
-</section>
-
+</div>
 <?php include 'comp/footer.php'; ?>

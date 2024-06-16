@@ -8,7 +8,6 @@
   <meta name="author" content="">
   <link rel="icon" href="assets/images/favicon.svg" type="image/x-icon">
   <link href="assets/css/plugins/animate.min.css" rel="stylesheet" type="text/css">
-  <link href="../cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/fonts/inter/inter.css" id="main-font-link">
   <link rel="stylesheet" href="assets/fonts/phosphor/duotone/style.css">
   <link rel="stylesheet" href="assets/fonts/tabler-icons.min.css">

@@ -4,7 +4,6 @@ $halaman = "Majalah Online";
 require 'Comp/header.php';
 require 'admin/function/init.php';
 
-// Cek apakah pengguna sudah login
 if (!isset($_SESSION[KEY]["login"])) {
     setError("Silahkan Login Terlebih Dahulu!");
     direct("login.php");
@@ -18,60 +17,81 @@ $majalah = query_select('penjualan', [
 ]);
 
 ?>
-
-<style>
-    .shadow-sm {
-        box-shadow: 0px 3px 5px rgba(0, 0, 0, .15);
-    }
-
-    footer {
-        text-align: center;
-    }
-
-    @media (max-width: 576px) {
-        .card-title {
-            font-size: 14px;
-        }
-
-        .card-text {
-            font-size: 12px;
-        }
-
-        footer p {
-            font-size: 10px;
-        }
-    }
-</style>
-
 <?php require 'Comp/navbar.php'; ?>
-
-<style>
-    .jumbotron {
-        height: 200px;
-        background: url('assets/img/bg.jpg');
-        background-size: cover;
-        background-position: 0px -300px;
-    }
-
-    .jumbotron h2,
-    .jumbotron h5 {
-        text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.35);
-    }
-</style>
-<div class="jumbotron border mt-5">
-    <div class="container pt-5 text-center">
-        <h2 class="display-4 text-white mb-3 ">Majalah Anda</h2>
+<div class="col-12">
+    <div class="card welcome-banner bg-blue-800">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="p-4">
+                        <h2 class="text-white"> Majalah Saya</h2>
+                        <p class="text-white">
+                            Produk kami digunakan di berbagai bidang, seperti fashion, teknologi,
+                            kesehatan, kuliner, bisnis, wisata, dan pendidikan. Kami berkomitmen untuk menyajikan
+                            konten yang menarik dan informatif kepada pembaca kami. Dengan fokus pada inovasi
+                            dan kualitas, kami terus mengembangkan solusi yang relevan untuk kebutuhan industri
+                            dan membawa pengalaman yang berharga bagi setiap pengguna produk kami.
+                        </p>
+                        <a href="majalah.php" class="btn btn-outline-light">Lihat Semua Majalah</a>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="img-welcome-banner">
+                        <img src="assets/images/widget/welcome-banner.png" alt="Welcome Banner"
+                            class="img-fluid mt-4">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <section class="main mt-4 pt-4" id="produk" style="min-height: 88vh;">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-3">
-            <h5 class="">Majalah Yang Anda Beli</h5>
-            <a href="logout.php" class="btn btn-danger text-white">Logout</a>
+            <h3 class="">Majalah Yang Anda Beli</h3>
         </div>
 
         <?php alert(); ?>
+
+        <div class="row">
+        <?php if ($majalah) : ?>
+            <?php foreach ($majalah as $item) : ?>
+
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="sticky-md-top product-sticky">
+                            <div id="carouselExampleCaptions" class="carousel slide ecomm-prod-slider" data-bs-ride="carousel">
+                            <div class="carousel-inner bg-light rounded position-relative">
+                                
+                                <div class=""><img src="admin/assets/img/<?= $berita['gambar'] ?>"
+                                    class="" alt="Product images" width="100%"></div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="col-md-6"><span class="badge bg-success f-14">Berita </span>
+                        <h5 class="my-3"><?= $berita["judul"] ?></h5>
+                        <h5 class="mt-4 mb-3">Penulis <?= $berita["penulis"] ?>  <?= formatTanggal($berita["tanggal_publish"]) ?></h5>
+                        <p><?= $berita["isi"] ?></p>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <?php endforeach; ?>
+            <?php else : ?>
+                <p>Tidak ada majalah yang ditemukan.</p>
+            <?php endif; ?>
+
+         </div>
 
         <div class="row">
             <?php if ($majalah) : ?>

@@ -21,19 +21,7 @@ $berita = query_select("berita", ["where" => "id_berita = '$id'"])[0];
               <div class="sticky-md-top product-sticky">
                 <div id="carouselExampleCaptions" class="carousel slide ecomm-prod-slider" data-bs-ride="carousel">
                   <div class="carousel-inner bg-light rounded position-relative">
-                    <div class="card-body position-absolute bottom-0 end-0">
-                      <ul class="list-inline ms-auto mb-0 prod-likes">
-                        <li class="list-inline-item m-0"><a href="#"
-                            class="avtar avtar-xs text-white text-hover-primary"><i class="ti ti-zoom-in f-18"></i></a>
-                        </li>
-                        <li class="list-inline-item m-0"><a href="#"
-                            class="avtar avtar-xs text-white text-hover-primary"><i class="ti ti-zoom-out f-18"></i></a>
-                        </li>
-                        <li class="list-inline-item m-0"><a href="#"
-                            class="avtar avtar-xs text-white text-hover-primary"><i
-                              class="ti ti-rotate-clockwise f-18"></i></a></li>
-                      </ul>
-                    </div>
+                    
                     <div class=""><img src="admin/assets/img/<?= $berita['gambar'] ?>"
                         class="" alt="Product images" width="100%"></div>
                   </div>

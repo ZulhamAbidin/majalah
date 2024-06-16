@@ -82,7 +82,13 @@
       </div>
     </div>
   </footer>
-
+  <script>
+    $(document).ready(function(){
+      $('.navbar-toggler').click(function(){
+        $('#navbarNav').toggleClass('show');
+      });
+    });
+  </script>
   
   <script src="../code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="assets/js/plugins/popper.min.js"></script>
@@ -109,10 +115,11 @@
   <script>
     preset_change('preset-1');
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
   <script>
     let ost = 0;
     document.addEventListener('scroll', function () {

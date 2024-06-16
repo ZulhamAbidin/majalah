@@ -151,7 +151,7 @@ function alert() {
   if (hasSuccess() || hasError()) {
 
     $comp = "";
-    $comp .= "<div class='text-white alrt alert ";
+    $comp .= "<div class='alert alert-success alert-dismissible ";
     $comp .= (hasSuccess() ? "alert-success'" : "alert-danger'") . " role='alert'>";
     $comp .= hasSuccess() ? success() : error();
     $comp .= "</div>";

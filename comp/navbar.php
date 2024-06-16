@@ -11,10 +11,13 @@ if ($current_url === '/webmajalah/index.php') {
 <header id="home" style="">
   <nav class="navbar navbar-expand-md navbar-light default">
     <div class="container"><a class="navbar-brand" href="index.php"><img src="assets/images/logo-dark.svg" alt="logo">
-      </a><button class="navbar-toggler rounded" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-        aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      </a>
+
+      <button class="navbar-toggler rounded" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
           <li class="nav-item px-1"><a class="nav-link" href="index.php">Beranda</a></li>
           <li class="nav-item px-1"><a class="nav-link" href="about.php">About</a></li>
@@ -33,8 +36,20 @@ if ($current_url === '/webmajalah/index.php') {
           <?php endif ?>
         </ul>
       </div>
+      
     </div>
   </nav>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var navToggler = document.querySelector(".navbar-toggler");
+      var navbarCollapse = document.querySelector(".navbar-collapse");
+
+      navToggler.addEventListener("click", function () {
+        navbarCollapse.classList.toggle("show");
+      });
+    });
+  </script>
 
   <?php if ($show_section): ?>
   <br><br>
@@ -63,4 +78,4 @@ if ($current_url === '/webmajalah/index.php') {
   </div>
 
   <?php endif; ?>
-</header
+          </header>
