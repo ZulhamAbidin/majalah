@@ -54,13 +54,14 @@ if (requestMethod() == "POST") {
 
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
   data-pc-theme_contrast="" data-pc-theme="light">
+  
   <div class="page-loader">
     <div class="bar"></div>
   </div>
+
   <div class="auth-main">
     <div class="auth-wrapper v1">
       <div class="auth-form">
-
         <?php if (hasSuccess()): ?>
         <script>
           setTimeout(() => {
@@ -75,68 +76,71 @@ if (requestMethod() == "POST") {
             ?>
 
         <div class="text-center"><a href="#"><img src="assets/images/logo-dark.png" alt="img"></a></div>
-        
-          <div class="card my-5">
-            <form action="" method="POST">
-              <div class="card-body">
+        <div class="saprator my-3"><span>Login Subscriber with your work username.</span></div>
+        <style>
+    </style>
+        <div class="card" style=" border: none !important; ">
+        <form action="" method="POST">
+          <div class="row">
 
-                <h4 class="text-center f-w-500 mb-3">Login Subscriber</h4>
-
-                <div class="mb-3">
-                  <input type="text" name="username" class="form-control" placeholder="username">
-                </div>
-
-                <div class="mb-3">
-                  <input type="password" name="password" class="form-control" placeholder="Password">
-                </div>
-
-                <div class="d-flex mt-1 justify-content-between align-items-center">
-                  <div class="form-check"><input class="form-check-input input-primary" type="checkbox"
-                      id="customCheckc1" checked=""> <label class="form-check-label text-muted"
-                      for="customCheckc1">Remember me?</label></div>
-                </div>
-
-                <div class="d-grid mt-4">
-                  <button type="submit" class="btn btn-primary">Login</button>
-                  <a href="index.php" type="button" class="mt-2 btn btn-primary">Kembali</a>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-end mt-4">
-                  <h6 class="f-w-500 mb-0">Don't have an Account?</h6><a href="register.php" class="link-primary">Create Account</a>
-                </div>
-
+            <div class="col-12">
+              <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="username">
               </div>
-            </form>
+            </div>
+
+            <div class="col-12">
+              <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+              </div>
+            </div>
+
+            <div class="d-flex mt-1 justify-content-between align-items-center">
+              <div class="form-check"><input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
+                  checked=""> <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label></div>
+            </div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary">Login</button>
+              <a href="index.php" type="button" class="mt-2 btn btn-primary">Kembali</a>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-end mt-4">
+              <h6 class="f-w-500 mb-0">Don't have an Account?</h6><a href="register.php" class="link-primary">Create
+                Account</a>
+            </div>
 
           </div>
+        </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="assets/js/plugins/popper.min.js"></script>
-    <script src="assets/js/plugins/simplebar.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <script src="assets/js/fonts/custom-font.js"></script>
-    <script src="assets/js/pcoded.js"></script>
-    <script src="assets/js/plugins/feather.min.js"></script>
-    <script>
-      layout_change('light');
-    </script>
-    <script>
-      change_box_container('false');
-    </script>
-    <script>
-      layout_caption_change('true');
-    </script>
-    <script>
-      layout_rtl_change('false');
-    </script>
-    <script>
-      preset_change('preset-1');
-    </script>
-    <script>
-      main_layout_change('vertical');
-    </script>
+  <script src="assets/js/plugins/popper.min.js"></script>
+  <script src="assets/js/plugins/simplebar.min.js"></script>
+  <script src="assets/js/plugins/bootstrap.min.js"></script>
+  <script src="assets/js/fonts/custom-font.js"></script>
+  <script src="assets/js/pcoded.js"></script>
+  <script src="assets/js/plugins/feather.min.js"></script>
+  <script>
+    layout_change('light');
+  </script>
+  <script>
+    change_box_container('false');
+  </script>
+  <script>
+    layout_caption_change('true');
+  </script>
+  <script>
+    layout_rtl_change('false');
+  </script>
+  <script>
+    preset_change('preset-1');
+  </script>
+  <script>
+    main_layout_change('vertical');
+  </script>
 </body>
 
 </html>

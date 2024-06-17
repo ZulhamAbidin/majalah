@@ -42,8 +42,9 @@ if (requestMethod() == "POST" )  {
   <link rel="stylesheet" href="assets/css/style-preset.css">
 </head>
 
-<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
-  
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
+  data-pc-theme_contrast="" data-pc-theme="light">
+
   <div class="page-loader">
     <div class="bar"></div>
   </div>
@@ -66,61 +67,72 @@ if (requestMethod() == "POST" )  {
           ?>
 
         <div class="text-center"><a href="#"><img src="assets/images/logo-dark.png" alt="img"></a></div>
-        
-          <div class="saprator my-3"><span>Register Subscriber with your work email.</span></div>
 
+        <div class="saprator my-3"><span>Register Subscriber with your work email.</span></div>
+
+        <div class="card" style=" border: none !important; ">
           <form action="" method="POST" enctype="multipart/form-data">
 
             <div class="row">
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <input type="text" name="nama" class="form-control" value="<?= old("nama") ?>" placeholder="Nama"></div>
-              </div>
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <input type="text" name="username" class="form-control" value="<?= old("username") ?>" placeholder="Username"></div>
-              </div>
-            </div>
 
-            <div class="mb-3">
-              <input type="text" class="form-control" value="<?= old("alamat") ?>" name="alamat" placeholder="Alamat Lengkap">
-            </div>
-            
-            <div class="mb-3">
-              <input type="email" class="form-control" value="<?= old("email") ?>" name="email" placeholder="Email">
-            </div>
-            
-            <!-- <div class="mb-3">
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <input type="text" name="nama" class="form-control" value="<?= old("nama") ?>" placeholder="Nama">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <input type="text" name="username" class="form-control" value="<?= old("username") ?>"
+                    placeholder="Username"></div>
+              </div>
+
+
+              <div class="mb-3">
+                <input type="text" class="form-control" value="<?= old("alamat") ?>" name="alamat"
+                  placeholder="Alamat Lengkap">
+              </div>
+
+              <div class="mb-3">
+                <input type="email" class="form-control" value="<?= old("email") ?>" name="email" placeholder="Email">
+              </div>
+
+              <!-- <div class="mb-3">
               <input type="text" class="form-control" value="<?= old("pic") ?>" name="pic" placeholder="Pic">
             </div> -->
-            
-            <div class="mb-3">
-              <input type="number" class="form-control" value="<?= old("no_telp") ?>" name="no_telp" placeholder="No Telfon">
-            </div>
-            
-            <div class="mb-3">
-              <input type="password" class="form-control" value="<?= old("password") ?>" name="password" placeholder="password">
-            </div>
 
-            <div class="d-flex mt-1 justify-content-between">
-              <div class="form-check"><input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked=""> <label class="form-check-label text-muted" for="customCheckc1">I agree to all the Terms &amp; Condition</label></div>
-            </div>
+              <div class="mb-3">
+                <input type="number" class="form-control" value="<?= old("no_telp") ?>" name="no_telp"
+                  placeholder="No Telfon">
+              </div>
 
-            <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary">Sign up</button>
-            </div>
+              <div class="mb-3">
+                <input type="password" class="form-control" value="<?= old("password") ?>" name="password"
+                  placeholder="password">
+              </div>
 
-            <div class="d-flex justify-content-between align-items-end mt-4">
-              <h6 class="f-w-500 mb-0">Already have an Account?</h6>
-              <a href="login.php" class="link-primary">Login here</a>
-            </div>
+              <div class="d-flex mt-1 justify-content-between">
+                <div class="form-check"><input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
+                    checked=""> <label class="form-check-label text-muted" for="customCheckc1">I agree to all the Terms
+                    &amp; Condition</label></div>
+              </div>
+
+              <div class="d-grid mt-4">
+                <button type="submit" class="btn btn-primary">Sign up</button>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-end mt-4">
+                <h6 class="f-w-500 mb-0">Already have an Account?</h6>
+                <a href="login.php" class="link-primary">Login here</a>
+              </div>
 
           </form>
-          
         </div>
 
       </div>
+
     </div>
+  </div>
   </div>
 
   <script src="assets/js/plugins/popper.min.js"></script>
