@@ -25,7 +25,7 @@ if ($majalah) {
                 <div class="card product-card">
                     <div class="card-img-top">
                         <a href="majalah-detail.php?id=' . $item['id_majalah'] . '">
-                            <img src="admin/assets/img/' . $item['cover'] . '" alt="image" class="img-prod img-fluid">
+                            <img src="admin/assets/img/' . $item['cover'] . ' " width="100%" alt="image" class="img-prod img-fluid">
                         </a>
                     </div>
                     <div class="card-body">

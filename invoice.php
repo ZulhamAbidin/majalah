@@ -1,6 +1,8 @@
+<?php $halaman = "Majalah Online" ?>
 <?php
 
 require 'admin/function/init.php';
+
 
 if (!isset($_GET['id'])) {
     echo "<div class='alert alert-danger'>ID tidak ditemukan</div>";
@@ -17,6 +19,7 @@ $query = $conn->prepare("
         p.id_majalah, 
         m.judul,
         p.harga, 
+        m.edisi,
         m.harga_digital,
         m.harga_cetak,
         m.harga_keduanya,
@@ -33,6 +36,8 @@ $query = $conn->prepare("
 $query->bind_param('i', $id);
 $query->execute();
 $result = $query->get_result();
+
+
 
 if ($result && $result->num_rows > 0) {
     $row = $result->fetch_assoc();
@@ -52,38 +57,43 @@ if ($result && $result->num_rows > 0) {
     $tgl_penjualan = date('d-m-Y', strtotime($row['tgl_penjualan']));
     $status_pembayaran = $row['status_pembayaran'] == 1 ? 'Sudah Dibayar' : 'Menunggu Konfirmasi Pembayaran Dari Admin';
 
+    // $status_pembayaran = '';
+    //  switch ($row['status_pembayaran']) {
+    //      case 1:
+    //          $status_pembayaran = '<span class="badge bg-success rounded-pill">Sudah Dibayar</span>';
+    //          break;
+    //      case 3:
+    //          $status_pembayaran = '<span class="badge bg-danger rounded-pill">Belum Dibayar</span>';
+    //          break;
+    //      default:
+    //          $status_pembayaran = '<span class="badge bg-light-secondary rounded-pill">Menunggu Konfirmasi Pembayaran Dari Admin</span>';
+    //          break;
+    //  }
+
     $rekening_text = '';
     switch ($row['metode_pembayaran']) {
         case 'BRI':
             $rekening_text = '
-                <h5>Pastikan anda melakukan pembayaran ke :</h5>
-                <h3 class="rekening-bri">BRI 31243 1233 123</h3>
-                <h3 class="rekening-bri">A.n Admin</h3>
-                <h3 class="rekening-bri">Jumlah Yang Harus Dibayarkan : Rp ' . $harga . '</h3>
+            <h5>Pastikan anda telah melakukan pembayaran ke : </h5>
+                <p class="rekening-bri fw-semibold">bri 31243 1233 123 A.n Majalah Online</p>
             ';
             break;
         case 'BCA':
             $rekening_text = '
-                <h5>Pastikan anda melakukan pembayaran ke :</h5>
-                <p class="rekening-bca">BCA 31243 1233 123</p>
-                <p class="rekening-bca">A.n Admin</p>
-                <p class="rekening-bca">Jumlah Yang Harus Dibayarkan : Rp ' . $harga . '</p>
+            <h5>Pastikan anda telah melakukan pembayaran ke : </h5>
+                <p class="rekening-bca fw-semibold">bca 31243 1233 123 A.n Majalah Online</p>
             ';
             break;
         case 'BNI':
             $rekening_text = '
-                <h5>Pastikan anda melakukan pembayaran ke :</h5>
-                <p class="rekening-bni">BNI 31243 1233 123</p>
-                <p class="rekening-bni">A.n Admin</p>
-                <p class="rekening-bni">Jumlah Yang Harus Dibayarkan : Rp ' . $harga . '</p>
+            <h5>Pastikan anda telah melakukan pembayaran ke : </h5>
+                <p class="rekening-bni fw-semibold">bni 31243 1233 123 A.n Majalah Online</p>
             ';
             break;
         case 'BSI':
             $rekening_text = '
-                <h5>Pastikan anda melakukan pembayaran ke :</h5>
-                <p class="rekening-bsi">BSI 31243 1233 123</p>
-                <p class="rekening-bsi">A.n Admin</p>
-                <p class="rekening-bsi">Jumlah Yang Harus Dibayarkan : Rp ' . $harga . '</p>
+                <h5>Pastikan anda telah melakukan pembayaran ke : </h5>
+                <p class="rekening-bsi fw-semibold">BSI 31243 1233 123 A.n Majalah Online</p>
             ';
             break;
         default:
@@ -99,81 +109,84 @@ if ($result && $result->num_rows > 0) {
 }
 
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Invoice</title>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
 
-                    <div class="card-header bg-primary text-white">
-                        <h3 class="card-title">Invoice</h3>
-                    </div>
+<?php require 'Comp/header.php'; ?>
+<?php require 'Comp/navbar.php'; ?>
 
-                    <div class="card-body">
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <h5>ID Transaksi: <?= $no_transaksi ?></h5>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="row align-items-center g-3">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="assets/images/logo-dark.svg" class="img-fluid" alt="images">
+                                <?php if ($row['status_pembayaran'] == 3) : ?>
+                                    <span class="badge bg-danger rounded-pill ms-2">Belum Dibayar</span>
+                                <?php elseif ($row['status_pembayaran'] == 1) : ?>
+                                    <span class="badge bg-success rounded-pill ms-2">Sudah Dibayar</span>
+                                <?php else : ?>
+                                    <span class="badge bg-light-secondary rounded-pill ms-2">Status Pembayaran</span>
+                                <?php endif; ?>
                             </div>
-                            <div class="col-md-6 text-end">
-                                <h5>Tanggal: <?= $tgl_penjualan ?></h5>
-                            </div>
+                            <p class="mb-0">INV <?= $no_transaksi ?></p>
                         </div>
-
-                        <table class="table table-bordered">
+                        <div class="col-sm-6 text-sm-end">
+                            <h6>Date <span class="text-muted f-w-400"><?= $tgl_penjualan ?></span></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Nama Subscriber</th>
                                     <th>Judul Majalah</th>
-                                    <th>Harga</th>
-                                    <th>Status Pembayaran</th>
                                     <th>Paket Pembelian</th>
                                     <th>Metode Pembayaran</th>
+                                    <th>Status Pembayaran</th>
+                                    <th class="text-end">Harga</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>x</td>
                                     <td><?= $row['nama'] ?></td>
-                                    <td><?= $row['judul'] ?></td>
-                                    <td>Rp <?= $harga ?></td>
-                                    <td><?= $status_pembayaran ?></td>
+                                    <td><?= $row['judul'] ?> <span class="fw-semibold"> Edisi <?= $row['edisi'] ?></span></td>
                                     <td><?= $paket_pembelian ?></td>
                                     <td><?= $row['metode_pembayaran'] ?></td>
+                                    <td><?= $status_pembayaran ?></td>
+                                    <td class="text-end">Rp <?= $harga ?></td>
                                 </tr>
                             </tbody>
                         </table>
-
-                        <div class="row mt-4">
-                            <div class="col-md-4">
-                                <h5 class="fw-bold">Metode Pembayaran:</h5>
-                                <p class="fs-5"><?= $row['metode_pembayaran'] ?></p>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="fs-5"><?= $rekening_text ?></p>
-                            </div>
-                            <div class="col-md-4 text-end">
-                                <h5 class="fw-bold">No. Transaksi:</h5>
-                                <p class="fs-5"><?= $no_transaksi ?></p>
-                            </div>
-                        </div>
-
-                        <div class="card-footer text-center">
-                            <p>Terima kasih telah bertransaksi dengan kami!</p>
-                        </div>
-
                     </div>
+                    <div class="text-start">
+                        <hr class="mb-2 mt-1 border-secondary border-opacity-50">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="invoice-total ms-auto">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="text-muted mb-1 text-start">Total Yang Harus Dibayarkan</h5>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="mb-1 text-end">Rp <?= $harga ?></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12"><label class="form-label">Note</label>
+                    <p class="mb-0"><?= $rekening_text ?></p>
+                </div>
+                <div class="col-12 text-end d-print-none">
+                    <a href="majalah-anda.php" class="btn btn-outline-secondary btn-print-invoice"> Kembali</a>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
-</html>
+</div>

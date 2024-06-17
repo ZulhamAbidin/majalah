@@ -37,7 +37,7 @@ if ($isLoggedIn) {
         <?php elseif (!$isLoggedIn): ?>
           <a href="login.php" class="btn btn-sm btn-warning text-white">Login untuk Membeli</a>
         <?php else: ?>
-          <p class="text-success">Anda sudah membeli majalah ini.</p>
+          <a href="majalah-anda.php" class=" btn btn-sm btn-primary ">Anda sudah membeli majalah ini, Lihat Majalah Saya</a>
         <?php endif; ?>
       </div>
     </div>
