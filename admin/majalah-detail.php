@@ -18,95 +18,99 @@ if ($item) {
 
 $hal = "Majalah";
  ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <?php partials("head.php") ?>
 
-<body class="g-sidenav-show   bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast=""
+  data-pc-theme="light">
+
+  <div class="loader-bg">
+    <div class="loader-track">
+      <div class="loader-fill"></div>
+    </div>
+  </div>
 
   <?php partials("aside.php") ?>
-  
-  <main class="main-content position-relative border-radius-lg ">
+  <?php partials("nav.php") ?>
 
-    <!-- Navbar -->
-    <?php partials("nav.php") ?>  
-    <!-- End Navbar -->
+  <div class="pc-container">
+    <div class="pc-content">
 
-    <div class="container-fluid py-4">
-      <div class="row mt-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
-          <div class="card " style="min-height: 70vh">
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0)">Majalah</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0)">Detail</a></li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <div class="page-header-title">
+                <h2 class="mb-0">Majalah Detail</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+
+        <div class="col-sm-12">
+          <div class="card">
+
             <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <img src="assets/img/<?= $item['cover'] ?>" class="img-fluid" alt="Cover Majalah"
+                    style="max-width: 100%;">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-4"><strong>Judul</strong></div>
+                <div class="col-md-8">: <?= $item["judul"] ?></div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-4"><strong>Edisi</strong></div>
+                <div class="col-md-8">: <?= $item["edisi"] ?></div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-4"><strong>Harga Digital</strong></div>
+                <div class="col-md-8">: <?= rp($item["harga_digital"]) ?></div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-4"><strong>Harga Cetak</strong></div>
+                <div class="col-md-8">: <?= rp($item["harga_cetak"]) ?></div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-4"><strong>Harga Cetak dan Digital</strong></div>
+                <div class="col-md-8">: <?= rp($item["harga_keduanya"]) ?></div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-4"><strong>Deskripsi</strong></div>
+                <div class="col-md-8">: <?= $item["desk"] ?></div>
+              </div>
+              <div class="row mb-3">
 
+                <a class="btn btn-primary" href="majalah-lihat.php?id=<?= $item["id_majalah"] ?>">Lihat Majalah</a>
+              </div>
 
-            	<div class="d-flex justify-content-between">
-	              <h6 class="mb-2">Detail Majalah</h6>
-            		<a href="majalah.php" class="btn btn-sm bg-gradient-secondary">Kembali</a>
-            	</div>
-
-            	<?php alert(); ?>
-              <style>
-                .data td {
-                  padding: 4px;
-                  padding-right: 20px;
-                  vertical-align: top;
-                }
-              </style>
-              <table class="data">
-                <tr>
-                  <td>Judul</td>
-                  <td><?= $item["judul"] ?></td>
-                </tr>
-                <tr>
-                  <td>Edisi</td>
-                  <td><?= $item["edisi"] ?></td>
-                </tr>
-                 <tr>
-                  <td>Harga Digital </td>
-                  <td><?= rp($item["harga_digital"]) ?></td>
-                </tr>
-                <tr>
-                  <td>Harga Cetak </td>
-                  <td><?= rp($item["harga_cetak"]) ?></td>
-                </tr>
-                <tr>
-                  <td>Harga Cetak Dan Digital </td>
-                  <td><?= rp($item["harga_keduanya"]) ?></td>
-                </tr>
-                <tr>
-                  <td>Desk</td>
-                  <td><?= $item["desk"] ?></td>
-                </tr>
-                <tr>
-                  <td>Isi</td>
-                  <td>
-                    <a class="btn btn-sm btn-info" href="majalah-lihat.php?id=<?= $item["id_majalah"] ?>">Lihat Malajah</a>
-                    </td>
-                </tr>
-                <tr>
-                  <td>Cover</td>
-                  <td>
-                    <img src="assets/img/<?= $item['cover'] ?>" style="width: 300px;" alt="">
-                  </td>
-                </tr>
-              </table>
 
             </div>
           </div>
         </div>
-        
+
       </div>
 
-      <?php partials("footer.php") ?>  
-
     </div>
+  </div>
 
-  </main>
-  
-  <?php partials("end.php") ?>  
+  <?php partials("footer.php") ?>
+  <?php partials("end.php") ?>
 </body>
 
 </html>

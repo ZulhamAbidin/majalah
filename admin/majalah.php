@@ -25,99 +25,194 @@ $hal = "Majalah";
 
 <?php partials("head.php") ?>
 
-<body class="g-sidenav-show   bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+<style>
+    .judul-col {
+        min-width: 150px !important; /* Set minimum width */
+        max-width: 300px !important; /* Set maximum width */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important; /* Add ellipsis if the text overflows */
+    }
+</style>
 
-  <?php partials("aside.php") ?>
-  
-  <main class="main-content position-relative border-radius-lg ">
 
-    <!-- Navbar -->
-    <?php partials("nav.php") ?>  
-    <!-- End Navbar -->
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast=""
+	data-pc-theme="light">
 
-    <div class="container-fluid py-4">
-      <div class="row mt-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
-          <div class="card " style="min-height: 70vh">
-            <div class="card-body">
-            	<div class="d-flex justify-content-between">
-	              <h6 class="mb-2">Majalah</h6>
-            		<a href="majalah-add.php" class="btn btn-sm btn-primary">Tambah Majalah</a>
-            	</div>
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
 
-            	<?php alert(); ?>
+	<?php partials("aside.php") ?>
+	<?php partials("nav.php") ?>
 
-	            <div class="table-responsive">
-	              <table class="table align-items-center ">
-	              	<thead>
-	              		<tr>
-	              			<th>No.</th>
-	              			<th>Judul</th>
-	              			<th>Edisi</th>
-							  <th>Harga Digital</th>
-							<th>Harga Cetak</th>
+	<div class="pc-container">
+		<div class="pc-content">
+
+			<div class="page-header">
+				<div class="page-block">
+					<div class="row align-items-center">
+						<div class="col-md-12">
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+								<li class="breadcrumb-item"><a href="javascript: void(0)">Majalah</a></li>
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<div class="page-header-title">
+								<h2 class="mb-0">Majalah</h2>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="text-md-end mt-3 mt-md-0">
+								<a href="majalah-add.php" class="btn btn-primary">+ Tambah Majalah</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="col-sm-12">
+					<div class="card">
+
+						<div class="card-body">
+
+							<?php toast(); ?>
+
+							<div class="table-responsive dt-responsive">
+								<table id="datas" class="table align-items-center ">
+									<thead>
+										<tr>
+											<th>No.</th>
+											<th>Judul</th>
+											<th>Edisi</th>
+											<th>Harga Digital</th>
+											<th>Harga Cetak</th>
 											<th>Harga Cetak Dan Digital</th>
-	              			<th>Cover</th>
-	              			<th style="width: 150px">Aksi</th>
-	              		</tr>
-	              	</thead>
-	                <tbody>
+											<th style="width: 150px" class="text-center">Aksi</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 
-	                	<?php if ($data): ?>
+				</div>
 
-	                		<?php $no = 1; ?>
-	                		<?php foreach ($data as $val): ?>
+			</div>
+		</div>
 
-	                			<tr>
-	                				<td><?= $first + $no++ ?></td>
-	                				<td><?= $val["judul"] ?></td>
-	                				<td><?= $val["edisi"] ?></td>
-									<td><?= rp($val['harga_cetak']) ?></td>
-											<td><?= rp($val['harga_digital']) ?></td>
-											<td><?= rp($val['harga_keduanya']) ?></td>
-	                				<td>
-	                					<img src="assets/img/<?= $val["cover"] ?>" style="width: 100px" alt="">
-	                				</td>
-	                				<td>
-	                					<a href="majalah-edit.php?id=<?= $val["id_majalah"] ?>" class="p-1 mb-0 btn btn-sm btn-secondary">Edit</a>
-	                					<a href="majalah-detail.php?id=<?= $val["id_majalah"] ?>" class="p-1 mb-0 btn btn-sm btn-info">Detail</a>
-	                					<a href="hapus.php?id=<?= $val["id_majalah"] ?>&data=majalah" class="p-1 mb-0 btn btn-sm btn-danger">Hapus</a>
-	                				</td>
-	                			</tr>
-	                			
-	                		<?php endforeach ?>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js">
+		</script>
+		<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+			$(document).ready(function () {
+				var table = $('#datas').DataTable({
+					"processing": true,
+					"serverSide": false,
+					"ajax": {
+						"url": "controller/get-majalah.php",
+						"type": "GET",
+						"dataSrc": "data"
+					},
+					"columns": [
+                { "data": "id_majalah" },
+                { "data": "judul", "className": "judul-col" },
+                { "data": "edisi" },
+                {
+                    "data": "harga_digital",
+                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                },
+                {
+                    "data": "harga_cetak",
+                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                },
+                {
+                    "data": "harga_keduanya",
+                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return '<a href="majalah-detail.php?id=' + row.id_majalah +
+                            '" class="btn btn-info">Detail</a> ' +
+                            '<a href="majalah-edit.php?id=' + row.id_majalah +
+                            '" class="btn btn-primary">Edit</a> ' +
+                            '<button class="btn btn-danger btn-delete" data-id="' + row.id_majalah + '">Delete</button>';
+                    }
+                }
+            ],
+					"language": {
+						"emptyTable": "Belum ada data.",
+						"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+						"infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+						"infoFiltered": "(disaring dari total _MAX_ entri)",
+						"lengthMenu": "Tampilkan _MENU_ entri",
+						"loadingRecords": "Memuat...",
+						"processing": "Sedang memproses...",
+						"search": "Cari:",
+						"zeroRecords": "Tidak ada data yang cocok ditemukan"
+					}
+				});
 
-	                	<?php endif ?>
-	                  
-	                </tbody>
-	              </table>
+				$('#datas').on('click', '.btn-delete', function () {
+					var id = $(this).data('id');
 
-	              <?php if ($data): ?>
-	              	
+					Swal.fire({
+						title: 'Apakah Anda yakin?',
+						text: "Data ini tidak dapat dikembalikan!",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Ya, hapus!'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$.ajax({
+								url: 'controller/delete-majalah.php',
+								type: 'POST',
+								data: {
+									id_majalah: id
+								},
+								success: function (response) {
+									Swal.fire(
+										'Dihapus!',
+										'Data Majalah telah dihapus.',
+										'success'
+									);
+									table.ajax.reload();
+								},
+								error: function (xhr, status, error) {
+									Swal.fire(
+										'Error!',
+										'Terdapat kesalahan saat menghapus data.',
+										'error'
+									);
+								}
+							});
+						}
+					});
+				});
 
-	              <div class="d-flex justify-content-start">
-                      <div>
-                          <a href="?page=<?= $previousPage ?><?= get("q") ? "&q=" . get("q") : "" ?>" class="btn btn-sm ms-2 py-1 px-2 btn-secondary <?= $page == 1 ? "disabled" : "" ?>">Prev</a>
-                          <a href="?page=<?= $nextPage ?><?= get("q") ? "&q=" . get("q") : "" ?>" class="btn btn-sm ms-2 py-1 px-2 btn-primary">Next</a>
-                      </div>
-                  </div>
-	            </div>
-              <?php endif ?>
-            	
-            </div>
-          </div>
-        </div>
-        
-      </div>
+				var toastEl = document.querySelector('.toast');
+				if (toastEl) {
+					var toast = new bootstrap.Toast(toastEl);
+					toast.show();
+				}
+			});
+		</script>
 
-      <?php partials("footer.php") ?>  
-
-    </div>
-
-  </main>
-  
-  <?php partials("end.php") ?>  
+		<?php partials("footer.php") ?>
+		<?php partials("end.php") ?>
 </body>
 
 </html>

@@ -157,15 +157,27 @@ function alert() {
     $comp .= "</div>";
     echo $comp;
 
-    // echo "
-    // <script>
-    // setTimeout(() => {
-    //   document.querySelector('.alrt').remove();
-    // }
-    // , 7000);
-    // </script>
-    // ";
-
   }
 
+
+}
+
+function toast() {
+    if (hasSuccess() || hasError()) {
+        $type = hasSuccess() ? "primary" : "danger";
+        $message = hasSuccess() ? success() : error();
+        echo "
+        <div class='toast-container position-fixed top-0 end-0 p-4 mb-2' style='z-index: 1050;'>
+            <div class='toast align-items-center text-white bg-$type border-0' role='alert' aria-live='assertive' aria-atomic='true'>
+                <div class='toast-header'>
+                    <img src='../assets/images/favicon.svg' class='img-fluid m-r-5' alt='images' style='width: 17px'>
+                    <strong class='me-auto'>Majalah Nusantara</strong>
+                    <button type='button' class='btn-close btn-close-primary me-2 m-auto' data-bs-dismiss='toast' aria-label='Close'></button>
+                </div>
+                <div class='toast-body text-white '>
+                    $message
+                </div>
+            </div>
+        </div>";
+    }
 }

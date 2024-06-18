@@ -5,20 +5,7 @@ if (!isset($_SESSION[KEY]["login"])) {
   direct("login.php");
   die;
 }
-
-$dataCount = 10;
-$page = getPage();
-$first = $page > 1 ? ($page * $dataCount) - $dataCount : 0;
-
-$previousPage = $page - 1;
-$nextPage = $page + 1;
-
-$data = query_select("penjualan", [
-	"join" => "majalah ON majalah.id_majalah = penjualan.id_majalah JOIN subscriber ON penjualan.id_sub = subscriber.id_sub",
-	"limit" => "$first, $dataCount",
-]);
-
-$hal = "Penjualan";
+$hal = "Data Kategori";
  ?>
 
 <!DOCTYPE html>
@@ -26,106 +13,196 @@ $hal = "Penjualan";
 
 <?php partials("head.php") ?>
 
-<body class="g-sidenav-show   bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast=""
+	data-pc-theme="light">
 
-  <?php partials("aside.php") ?>
-  
-  <main class="main-content position-relative border-radius-lg ">
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
 
-    <!-- Navbar -->
-    <?php partials("nav.php") ?>  
-    <!-- End Navbar -->
+	<style>
+		.majalah-column {
+			max-width: 200px !important;
+			padding: 10px !important;
+			white-space: normal !important;
+			word-break: break-word !important;
+			overflow-wrap: break-word !important;
+		}
+	</style>
 
-    <div class="container-fluid py-4">
-      <div class="row mt-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
-          <div class="card " style="min-height: 70vh">
-            <div class="card-body">
-            	<div class="d-flex justify-content-between">
-	              <h6 class="mb-2">Penjualan Majalah</h6>
-            	</div>
+	<?php partials("aside.php") ?>
+	<?php partials("nav.php") ?>
 
-            	<?php alert(); ?>
+	<div class="pc-container">
+		<div class="pc-content">
 
-	            <div class="table-responsive">
-	              <table class="table align-items-center ">
-	              	<thead>
-	              		<tr>
-	              			<th>No.</th>
-	              			<th>Subscriber</th>
-							<th>Metode <br> Pembayaran</th>
-	              			<th>Majalah</th>
-	              			<th>Harga</th>
-	              			<th>Status</th>
-	              			<th style="width: 150px">Aksi</th>
-	              		</tr>
-	              	</thead>
-	                <tbody>
+			<div class="page-header">
+				<div class="page-block">
+					<div class="row align-items-center">
+						<div class="col-md-12">
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+								<li class="breadcrumb-item"><a href="javascript: void(0)">Penjualan</a></li>
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<div class="page-header-title">
+								<h2 class="mb-0">Penjualan</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-	                	<?php if ($data): ?>
+			<?php alert(); ?>
 
-	                		<?php $no = 1; ?>
-	                		<?php foreach ($data as $val): ?>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="datas" class="table align-items-center ">
+									<thead>
+										<tr>
+											<th>No.</th>
+											<th>Subscriber</th>
+											<th>Metode <br> Pembayaran</th>
+											<th>Majalah</th>
+											<th>Harga</th>
+											<th>Status</th>
+											<th style="width: 150px">Aksi</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-	                			<tr>
-	                				<td><?= $first + $no++ ?></td>
-	                				<td><?= $val["nama"] ?></td>
-									<td><?= $val["metode_pembayaran"] ?></td>
-	                				<td><?= $val["judul"] ?></td>
-	                				<td><?= rp($val["harga"]) ?></td>
-	                				<td>
-	                					<?php if ($val["status_pembayaran"] == 0){ 
-	                						echo "Menunggu Pembayaran";
-	                					} else if ($val["status_pembayaran"] == 2) {
-	                						echo "Menunggu Konfirmasi Admin";
-	                					} else if ($val["status_pembayaran"] == 1) {
-	                						echo "Sudah Bayar";
-	                					} else if ($val["status_pembayaran"] == 3) {
-	                						echo "Pembayaran Ditolak=";
-	                					}
-	                					?>
-	                				</td>
-	                				<td>
-		                					<a href="penjualan-konfirmasi.php?id=<?= $val["id_p"] ?>" class="p-1 mb-0 btn btn-sm btn-secondary">Konfirmasi</a>
-	                					<a href="hapus.php?id=<?= $val["id_p"] ?>&data=penjualan" class="p-1 mb-0 btn btn-sm btn-danger">Hapus</a>
-	                				</td>
-	                			</tr>
-	                			
-	                		<?php endforeach ?>
+		</div>
+	</div>
 
-	                	<?php endif ?>
-	                  
-	                </tbody>
-	              </table>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"> </script>
+	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		$(document).ready(function () {
 
-	              <?php if ($data): ?>
-	              	
+			var table = $('#datas').DataTable({
+				"processing": true,
+				"serverSide": false,
+				"ajax": {
+					"url": "controller/get-penjualan.php",
+					"type": "GET",
+					"dataSrc": "data"
+				},
+				"columns": [{
+						"data": "id_p",
+						"title": "No."
+					},
+					{
+						"data": "subscriber_nama", // diambil dari tabel subscriber kolom nama
+						"title": "Subscriber"
+					},
+					{
+						"data": "metode_pembayaran", // diambil dari tabel penjualan kolom metode pembayaran
+						"title": "Metode Pembayaran"
+					},
+					{
+						"data": "judul_majalah", // diambil dari tabel majalah kolom judul 
+						"title": "Majalah",
+						"className": "majalah-column" // Tambahkan kelas khusus
+					},
+					{
+						"data": "harga", // diambil dari tabel penjualan kolom harga 
+						"title": "Harga"
+					},
+					{
+						"data": "status_pembayaran", // diambil dari tabel penjualan kolom  status_pembayaran
+						"title": "Status Pembayaran",
+						"render": function (data, type, row) {
+							return (data == 1) ? 'Lunas' : 'Belum Lunas';
+						}
+					},
+					{
+						"data": null,
+						"title": "Aksi",
+						"render": function (data, type, row) {
+							return '<button class="btn btn-danger btn-delete" data-id="' + row.id_p +
+								'">Hapus</button>';
+						}
+					}
+				],
+				"language": {
+					"emptyTable": "Belum ada data.",
+					"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+					"infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+					"infoFiltered": "(disaring dari total _MAX_ entri)",
+					"lengthMenu": "Tampilkan _MENU_ entri",
+					"loadingRecords": "Memuat...",
+					"processing": "Sedang memproses...",
+					"search": "Cari:",
+					"zeroRecords": "Tidak ada data yang cocok ditemukan"
+				}
+			});
 
-	              <div class="d-flex justify-content-start">
-                      <div>
-                          <a href="?page=<?= $previousPage ?><?= get("q") ? "&q=" . get("q") : "" ?>" class="btn btn-sm ms-2 py-1 px-2 btn-secondary <?= $page == 1 ? "disabled" : "" ?>">Prev</a>
-                          <a href="?page=<?= $nextPage ?><?= get("q") ? "&q=" . get("q") : "" ?>" class="btn btn-sm ms-2 py-1 px-2 btn-primary">Next</a>
-                      </div>
-                  </div>
-	            </div>
-              <?php endif ?>
-            	
-            </div>
-          </div>
-        </div>
-        
-      </div>
+			$('#datas').on('click', '.btn-delete', function () {
+				var id = $(this).data('id');
 
-      <?php partials("footer.php") ?>  
+				Swal.fire({
+					title: 'Apakah Anda yakin?',
+					text: "Data ini tidak dapat dikembalikan!",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya, hapus!'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url: 'controller/delete-penjualan.php',
+							type: 'POST',
+							data: {
+								id_penjualan: id
+							},
+							success: function (response) {
+								Swal.fire(
+									'Dihapus!',
+									'Data penjualan telah dihapus.',
+									'success'
+								);
+								table.ajax.reload();
+							},
+							error: function (xhr, status, error) {
+								Swal.fire(
+									'Error!',
+									'Terdapat kesalahan saat menghapus data.',
+									'error'
+								);
+							}
+						});
+					}
+				});
+			});
 
-    </div>
 
+			var toastEl = document.querySelector('.toast');
+			if (toastEl) {
+				var toast = new bootstrap.Toast(toastEl);
+				toast.show();
+			}
+		});
+	</script>
 
-
-  </main>
-  
-  <?php partials("end.php") ?>  
+	<?php partials("footer.php") ?>
+	<?php partials("end.php") ?>
 </body>
 
 </html>

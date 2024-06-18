@@ -33,57 +33,68 @@ $hal = "Data Kategori";
 
 <?php partials("head.php") ?>
 
-<body class="g-sidenav-show   bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
+
+  <div class="loader-bg">
+    <div class="loader-track">
+      <div class="loader-fill"></div>
+    </div>
+  </div>
 
   <?php partials("aside.php") ?>
-  
-  <main class="main-content position-relative border-radius-lg ">
+  <?php partials("nav.php") ?>
 
-    <!-- Navbar -->
-    <?php partials("nav.php") ?>  
-    <!-- End Navbar -->
+  <div class="pc-container">
+    <div class="pc-content">
 
-    <div class="container-fluid py-4">
-      <div class="row mt-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
-          <div class="card " style="min-height: 70vh">
-            <div class="card-body">
+    <div class="page-header">
+				<div class="page-block">
+					<div class="row align-items-center">
+						<div class="col-md-12">
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.php">Home</a></li>
+								<li class="breadcrumb-item"><a href="javascript: void(0)">Kategori</a></li>
+								<li class="breadcrumb-item"><a href="javascript: void(0)">Edit</a></li>
+							</ul>
+						</div>
+						<div class="col-md-12">
+							<div class="page-header-title">
+								<h2 class="mb-0">Kategori Edit</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
-            	<div class="d-flex justify-content-between">
-	              <h6 class="mb-2">Kategori Baru</h6>
-            		<a href="kategori.php" class="btn btn-sm bg-gradient-secondary">Kembali</a>
-            	</div>
+      <div class="row">
 
-            	<?php alert(); ?>
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-body">              
+              <?php alert(); ?>
 
-            	 <form role="form" method="POST">
+              <form role="form" method="POST">
                 <div class="mb-3">
-                	<label for="">Nama Kategori</label>
+                  <label for="" class="mb-2">Nama Kategori</label>
                   <input type="text" value="<?= old("nama") ?>" class="form-control" placeholder="Nama Kategori" name="nama">
                 </div>
-               
-                <div class="text-left">
-                  <button type="submit" class="btn bg-gradient-primary btn-sm">Tambah</button>
+
+                <div class="text-end">
+                  <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
                 </div>
               </form>
 
-	            
-            	
             </div>
           </div>
         </div>
-        
+
       </div>
 
-      <?php partials("footer.php") ?>  
-
     </div>
+  </div>
 
-  </main>
-  
-  <?php partials("end.php") ?>  
+  <?php partials("footer.php") ?>
+  <?php partials("end.php") ?>
 </body>
-
 </html>

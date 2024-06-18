@@ -6,14 +6,11 @@ if (!isset($_SESSION[KEY]["login"])) {
     die;
 }
 
-// Inisialisasi variabel untuk menyimpan data schedules
 $id_schedules = $carrierName = $vesselName = $voyageNumber = $tradeLine = $portCodeOrigin = $departureDate = $transhipment = $transhipmentDeparture = $portCodeDestination = $arrivalDate = $duration = $forwarder = $berthingTerminal = $requestQuote = "";
 
-// Tangkap id yang dikirimkan dari URL
 if (isset($_GET['id'])) {
     $id_schedules = $_GET['id'];
 
-    // Query untuk mengambil data schedules berdasarkan id
     $sql = "SELECT * FROM schedules WHERE id_schedules = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id_schedules);
@@ -21,7 +18,6 @@ if (isset($_GET['id'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
-        // Ambil data schedules
         $row = $result->fetch_assoc();
         $carrierName = $row['CarrierName'];
         $vesselName = $row['VesselName'];
@@ -38,19 +34,17 @@ if (isset($_GET['id'])) {
         $berthingTerminal = $row['BerthingTerminal'];
         $requestQuote = $row['RequestQuote'];
     } else {
-        // Jika id tidak ditemukan, redirect ke halaman schedules.php atau berikan pesan error
+        
         direct("schedules.php");
         die;
     }
 } else {
-    // Jika tidak ada id yang dikirim, redirect ke halaman schedules.php atau berikan pesan error
+    
     direct("schedules.php");
     die;
 }
 
-// Proses update data jika form di-submit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Tangkap data yang dikirimkan dari form
     $carrierName = $_POST['carrierName'];
     $vesselName = $_POST['vesselName'];
     $voyageNumber = $_POST['voyageNumber'];
@@ -66,7 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $berthingTerminal = $_POST['berthingTerminal'];
     $requestQuote = $_POST['requestQuote'];
 
-    // Query untuk update data schedules
     $sql_update = "UPDATE schedules SET 
                     CarrierName = ?, 
                     VesselName = ?, 
@@ -102,14 +95,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                              $id_schedules);
 
     if ($stmt_update->execute()) {
-        // Redirect ke halaman schedules.php setelah berhasil update
         direct("schedules.php");
         die;
     } else {
-        // Handle error jika terjadi kesalahan saat update
         echo "Error: " . $stmt_update->error;
     }
 }
+
+$hal = "sch";
 ?>
 
 <!DOCTYPE html>
@@ -117,96 +110,149 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php partials("head.php") ?>
 
-<body class="g-sidenav-show bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast=""
+    data-pc-theme="light">
+
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
 
     <?php partials("aside.php") ?>
+    <?php partials("nav.php") ?>
 
-    <main class="main-content position-relative border-radius-lg ">
+    <div class="pc-container">
+        <div class="pc-content">
 
-        <!-- Navbar -->
-        <?php partials("nav.php") ?>
-        <!-- End Navbar -->
-
-        <div class="container-fluid py-4">
-            <div class="row mt-4">
-                <div class="col-lg-12 mb-lg-0 mb-4">
-                    <div class="card " style="min-height: 70vh">
-                        <div class="card-body">
-                            <h6 class="mb-4">Edit Daftar Jadwal</h6>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . htmlspecialchars($id_schedules); ?>" method="POST">
-                                <input type="hidden" name="id_schedules" value="<?php echo htmlspecialchars($id_schedules); ?>">
-                                <div class="mb-3">
-                                    <label for="carrierName" class="form-label">Nama Pengangkut</label>
-                                    <input type="text" class="form-control" id="carrierName" name="carrierName" required value="<?php echo htmlspecialchars($carrierName); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="vesselName" class="form-label">Nama Kapal</label>
-                                    <input type="text" class="form-control" id="vesselName" name="vesselName" required value="<?php echo htmlspecialchars($vesselName); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="voyageNumber" class="form-label">Nomor Perjalanan</label>
-                                    <input type="text" class="form-control" id="voyageNumber" name="voyageNumber" value="<?php echo htmlspecialchars($voyageNumber); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tradeLine" class="form-label">Jalur Perdagangan</label>
-                                    <input type="text" class="form-control" id="tradeLine" name="tradeLine" value="<?php echo htmlspecialchars($tradeLine); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="portCodeOrigin" class="form-label">Kode Pelabuhan Asal</label>
-                                    <input type="text" class="form-control" id="portCodeOrigin" name="portCodeOrigin" value="<?php echo htmlspecialchars($portCodeOrigin); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="departureDate" class="form-label">Tanggal Keberangkatan</label>
-                                    <input type="date" class="form-control" id="departureDate" name="departureDate" value="<?php echo htmlspecialchars($departureDate); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="transhipment" class="form-label">Pengangkutan Ulang</label>
-                                    <input type="text" class="form-control" id="transhipment" name="transhipment" value="<?php echo htmlspecialchars($transhipment); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="transhipmentDeparture" class="form-label">Tanggal Keberangkatan Transhipment</label>
-                                    <input type="date" class="form-control" id="transhipmentDeparture" name="transhipmentDeparture" value="<?php echo htmlspecialchars($transhipmentDeparture); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="portCodeDestination" class="form-label">Kode Pelabuhan Tujuan</label>
-                                    <input type="text" class="form-control" id="portCodeDestination" name="portCodeDestination" value="<?php echo htmlspecialchars($portCodeDestination); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="arrivalDate" class="form-label">Tanggal Kedatangan</label>
-                                    <input type="date" class="form-control" id="arrivalDate" name="arrivalDate" value="<?php echo htmlspecialchars($arrivalDate); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="duration" class="form-label">Durasi</label>
-                                    <input type="text" class="form-control" id="duration" name="duration" value="<?php echo htmlspecialchars($duration); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="forwarder" class="form-label">Eksportir</label>
-                                    <input type="text" class="form-control" id="forwarder" name="forwarder" value="<?php echo htmlspecialchars($forwarder); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="berthingTerminal" class="form-label">Terminal Berlabuh</label>
-                                    <input type="text" class="form-control" id="berthingTerminal" name="berthingTerminal" value="<?php echo htmlspecialchars($berthingTerminal); ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="requestQuote" class="form-label">Permintaan Penawaran</label>
-                                    <textarea class="form-control" id="requestQuote" name="requestQuote" rows="3"><?php echo htmlspecialchars($requestQuote); ?></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="schedules.php" class="btn btn-secondary">Cancel</a>
-                            </form>
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0)">Schedules</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0)">Edit</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="page-header-title">
+                                <h2 class="mb-0">Schedules Edit</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <?php partials("footer.php") ?>
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . htmlspecialchars($id_schedules); ?>"
+                                    method="POST">
+                                  <div class="row">
+                                  <input type="hidden" name="id_schedules"
+                                        value="<?php echo htmlspecialchars($id_schedules); ?>">
+                                    <div class="col-12 col-md-4">
+                                        <label for="carrierName" class="form-label mt-3">Nama Pengangkut</label>
+                                        <input type="text" class="form-control" id="carrierName" name="carrierName"
+                                            required value="<?php echo htmlspecialchars($carrierName); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="vesselName" class="form-label mt-3">Nama Kapal</label>
+                                        <input type="text" class="form-control" id="vesselName" name="vesselName"
+                                            required value="<?php echo htmlspecialchars($vesselName); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="voyageNumber" class="form-label mt-3">Nomor Perjalanan</label>
+                                        <input type="text" class="form-control" id="voyageNumber" name="voyageNumber"
+                                            value="<?php echo htmlspecialchars($voyageNumber); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="tradeLine" class="form-label mt-3">Jalur Perdagangan</label>
+                                        <input type="text" class="form-control" id="tradeLine" name="tradeLine"
+                                            value="<?php echo htmlspecialchars($tradeLine); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="portCodeOrigin" class="form-label mt-3">Kode Pelabuhan Asal</label>
+                                        <input type="text" class="form-control" id="portCodeOrigin"
+                                            name="portCodeOrigin"
+                                            value="<?php echo htmlspecialchars($portCodeOrigin); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="departureDate" class="form-label mt-3">Tanggal Keberangkatan</label>
+                                        <input type="date" class="form-control" id="departureDate" name="departureDate"
+                                            value="<?php echo htmlspecialchars($departureDate); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <label for="transhipment" class="form-label mt-3">Pengangkutan Ulang</label>
+                                        <input type="text" class="form-control" id="transhipment" name="transhipment"
+                                            value="<?php echo htmlspecialchars($transhipment); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <label for="transhipmentDeparture" class="form-label mt-3">Tanggal Keberangkatan
+                                            Transhipment</label>
+                                        <input type="date" class="form-control" id="transhipmentDeparture"
+                                            name="transhipmentDeparture"
+                                            value="<?php echo htmlspecialchars($transhipmentDeparture); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <label for="portCodeDestination" class="form-label mt-3">Kode Pelabuhan
+                                            Tujuan</label>
+                                        <input type="text" class="form-control" id="portCodeDestination"
+                                            name="portCodeDestination"
+                                            value="<?php echo htmlspecialchars($portCodeDestination); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <label for="arrivalDate" class="form-label mt-3">Tanggal Kedatangan</label>
+                                        <input type="date" class="form-control" id="arrivalDate" name="arrivalDate"
+                                            value="<?php echo htmlspecialchars($arrivalDate); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <label for="duration" class="form-label mt-3">Durasi</label>
+                                        <input type="text" class="form-control" id="duration" name="duration"
+                                            value="<?php echo htmlspecialchars($duration); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <label for="forwarder" class="form-label mt-3">Eksportir</label>
+                                        <input type="text" class="form-control" id="forwarder" name="forwarder"
+                                            value="<?php echo htmlspecialchars($forwarder); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <label for="berthingTerminal" class="form-label mt-3">Terminal Berlabuh</label>
+                                        <input type="text" class="form-control" id="berthingTerminal"
+                                            name="berthingTerminal"
+                                            value="<?php echo htmlspecialchars($berthingTerminal); ?>">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <label for="requestQuote" class="form-label mt-3">Permintaan Penawaran</label>
+                                        <input class="form-control" id="requestQuote" name="requestQuote"
+                                            value="<?php echo htmlspecialchars($requestQuote); ?>"></input>
+                                    </div>
+                                    <div class="col-12 text-end mt-4">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="schedules.php" class="btn btn-secondary">Cancel</a>
+                                    </div>
+                                  </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
+    </div>
 
-    </main>
-
+    <?php partials("footer.php") ?>
     <?php partials("end.php") ?>
 </body>
 

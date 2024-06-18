@@ -1,3 +1,17 @@
+
+<!-- 
+<form role="form" method="POST">
+
+  <input type="text" class="form-control form-control-lg" placeholder="Email" aria-label="Email" name="email">
+
+  <input type="password" name="password" class="form-control form-control-lg" placeholder="Password"
+    aria-label="Password">
+
+  <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Masuk</button>
+
+</form>
+ -->
+
 <?php 
 require 'function/init.php';
 
@@ -29,94 +43,109 @@ if (requestMethod() == "POST" )  {
 }
 
 ?>
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
-  <title>
-    Halaman Login
-  </title>
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-  <!-- Nucleo Icons -->
-  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- CSS Files -->
-  <link id="pagestyle" href="assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>Login </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimal-ui">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="../assets/fonts/inter/inter.css" id="main-font-link">
+  <link rel="stylesheet" href="../assets/fonts/phosphor/duotone/style.css">
+  <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css">
+  <link rel="stylesheet" href="../assets/fonts/feather.css">
+  <link rel="stylesheet" href="../assets/fonts/fontawesome.css">
+  <link rel="stylesheet" href="../assets/fonts/material.css">
+  <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link">
+  <link rel="stylesheet" href="../assets/css/style-preset.css">
 </head>
 
-<body class="">
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr"
+  data-pc-theme_contrast="" data-pc-theme="light">
   
-  <main class="main-content  mt-0">
-    <section>
-      <div class="page-header min-vh-100">
-        <div class="container">
+  <div class="page-loader">
+    <div class="bar"></div>
+  </div>
+
+  <div class="auth-main">
+    <div class="auth-wrapper v1">
+      <div class="auth-form">
+      
+
+        <?php 
+              alert()
+            ?>
+
+        <div class="text-center"><a href="#"><img src="../assets/images/logo-dark.png" alt="img"></a></div>
+        <div class="saprator my-3"><span>Login Admin with your work email.</span></div>
+        <style>
+    </style>
+        <div class="card" style=" border: none !important; ">
+
+        <form role="form" method="POST">
           <div class="row">
-            <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-              <div class="card card-plain">
-                <div class="card-header pb-0 text-start">
-                  <h4 class="font-weight-bolder">Halaman Login Admin</h4>
-                </div>
-                <div class="card-body">
 
-                  <?php 
-                  alert();
-                   ?>
-
-                  <form role="form" method="POST">
-                    <div class="mb-3">
-                      <input type="text" class="form-control form-control-lg" placeholder="Email" aria-label="Email" name="email">
-                    </div>
-                    <div class="mb-3">
-                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
-                    </div>
-                    
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Masuk</button>
-                    </div>
-                  </form>
-                </div>
-                
+            <div class="col-12">
+              <div class="mb-3">
+                <input type="email" name="email" class="form-control" placeholder="email">
               </div>
             </div>
-            <div class="opacity-0 col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
-          background-size: cover;">
-                <span class="mask bg-gradient-primary opacity-6"></span>
-                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new currency"</h4>
-                <p class="text-white position-relative">The more effortless the writing looks, the more effort the writer actually put into the process.</p>
+
+            <div class="col-12">
+              <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Password">
               </div>
             </div>
+
+            <div class="d-flex mt-1 justify-content-between align-items-center">
+              <div class="form-check"><input class="form-check-input input-primary" type="checkbox" id="customCheckc1"
+                  checked=""> <label class="form-check-label text-muted" for="customCheckc1">Remember me?</label></div>
+            </div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary">Login</button>
+              <a href="../index.php" type="button" class="mt-2 btn btn-primary">Kembali</a>
+            </div>
+
           </div>
+        </form>
         </div>
       </div>
-    </section>
-  </main>
-  <!--   Core JS Files   -->
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap.min.js"></script>
-  <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+    </div>
+  </div>
+
+  <script src="../assets/js/plugins/popper.min.js"></script>
+  <script src="../assets/js/plugins/simplebar.min.js"></script>
+  <script src="../assets/js/plugins/bootstrap.min.js"></script>
+  <script src="../assets/js/fonts/custom-font.js"></script>
+  <script src="../assets/js/pcoded.js"></script>
+  <script src="../assets/js/plugins/feather.min.js"></script>
   <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
+    layout_change('light');
   </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script>
+    change_box_container('false');
+  </script>
+  <script>
+    layout_caption_change('true');
+  </script>
+  <script>
+    layout_rtl_change('false');
+  </script>
+  <script>
+    preset_change('preset-1');
+  </script>
+  <script>
+    main_layout_change('vertical');
+  </script>
 </body>
 
 </html>

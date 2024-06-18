@@ -1,149 +1,135 @@
 <?php 
 global $hal;
  ?>
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main" data-color="dark">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
-        <img src="assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Dashboard</span>
+
+
+ <!-- [ Sidebar Menu ] start -->
+ <nav class="pc-sidebar">
+  <div class="navbar-wrapper">
+    <div class="m-header">
+      <a href="#" class="b-brand text-primary">
+        <img src="../assets/images/logo-dark.png" width="70%" />
       </a>
     </div>
-    <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse  w-auto " style="height: inherit;" id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link <?= $hal == "Dashboard" ? "active" : "" ?>" href="index.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?= $hal == "Data Kategori" ? "active" : "" ?>" href="kategori.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Kategori</span>
-          </a>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link <?= $hal == "Data Tag" ? "active" : "" ?>" href="tag.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Tag</span>
-          </a>
-        </li>
+    <div class="navbar-content">
 
-        <li class="nav-item">
-          <a class="nav-link <?= $hal == "Majalah" ? "active" : "" ?>" href="majalah.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-primary text-sm opacity-10"></i>
+      <div class="card pc-user-card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar wid-45 rounded-circle" />
             </div>
-            <span class="nav-link-text ms-1">Majalah</span>
-          </a>
-        </li>
+            <div class="flex-grow-1 ms-3 me-2">
+              <h6 class="mb-0"><?= $_SESSION[KEY]["login"]["nama"] ?></h6>
+              <small>Administrator</small>
+            </div>
+            <a class="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-sort-outline"></use>
+              </svg>
+            </a>
+          </div>
+          <div class="collapse pc-user-links" id="pc_sidebar_userlink">
+            <div class="pt-3">
+              <a href="logout.php">
+                <i class="ti ti-power"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <li class="nav-item">
-          <a class="nav-link <?= $hal == "schedules" ? "active" : "" ?>" href="schedules.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">schedules</span>
-          </a>
-        </li>
+      <ul class="pc-navbar">
 
-        <li class="nav-item">
-          <a class="nav-link <?= $hal == "Penjualan" ? "active" : "" ?>" href="penjualan.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Penjualan</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link <?= $hal == "Berita" ? "active" : "" ?>" href="berita.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Berita</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link <?= $hal == "Data Admin" ? "active" : "" ?>" href="admin.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Data Admin</span>
-          </a>
-        </li>
-
-        <li class="nav-item ">
-          <a class="nav-link <?= $hal == "Subscriber" ? "active" : "" ?>" href="subscriber.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Subscriber</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="logout.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Logout</span>
-          </a>
-        </li>
-       <!--  <li class="nav-item">
-          <a class="nav-link " href="./pages/billing.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="./pages/virtual-reality.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Virtual Reality</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="./pages/rtl.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">RTL</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="./pages/profile.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="./pages/sign-in.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li> -->
         
+        <li class="pc-item pc-caption">
+          <label>Navigation</label>
+        </li>
+        
+        <li class="pc-item <?= $hal == "Dashboard" ? "active" : "" ?>"><a href="index.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-status-up"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Dashboard</span></a>
+        </li>
+
+        <li class="pc-item <?= $hal == "Data Kategori" ? "active" : "" ?>"><a href="kategori.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-password-check"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Kategori</span></a>
+        </li>
+
+        <li class="pc-item <?= $hal == "Data Tag" ? "active" : "" ?>"><a href="tag.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-clipboard"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Tag</span></a>
+        </li>
+
+        <li class="pc-item <?= $hal == "Majalah" ? "active" : "" ?>"><a href="majalah.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-keyboard"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Majalah</span></a>
+        </li>
+
+        <li class="pc-item <?= $hal == "sch" ? "active" : "" ?>"><a href="schedules.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-airplane"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Schedules</span></a>
+        </li>
+
+        <li class="pc-item  <?= $hal == "Penjualan" ? "active" : "" ?>"><a href="penjualan.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-add-item"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Penjualan</span></a>
+        </li>
+
+        <li class="pc-item <?= $hal == "Berita" ? "active" : "" ?>"><a href="berita.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-keyboard"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Berita</span></a>
+        </li>
+
+        <li class="pc-item <?= $hal == "Data Admin" ? "active" : "" ?>"><a href="admin.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-user"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Data Admin</span></a>
+        </li>
+
+        <li class="pc-item"><a href="logout.php" class="pc-link">
+            <span class="pc-micon">
+              <svg class="pc-icon">
+                <use xlink:href="#custom-notification-status"></use>
+              </svg>
+            </span>
+            <span class="pc-mtext">Logout</span></a>
+        </li>
+
       </ul>
     </div>
-    
-  </aside>
+  </div>
+</nav>
