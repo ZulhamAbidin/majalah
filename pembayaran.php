@@ -45,7 +45,7 @@ if (requestMethod() == "POST" )  {
 
     if (File::has("file")) {
         $filename .= File::randomName() . File::getExt("file");
-        File::save("file", "assets/img/$filename");
+        File::save("file", "admin/assets/img/$filename");
     }
 
     $data["bukti_pembayaran"] = $filename;
