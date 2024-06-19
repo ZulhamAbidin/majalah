@@ -80,14 +80,14 @@ $role = $_SESSION[KEY]["login"]["role"];
         <?php endif; ?>
 
         <?php if ($role == 1) : ?>
-        <li class="pc-item <?= $hal == "Data Tag" ? "active" : "" ?>"><a href="tag.php" class="pc-link">
+        <!-- <li class="pc-item <?= $hal == "Data Tag" ? "active" : "" ?>"><a href="tag.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
                 <use xlink:href="#custom-clipboard"></use>
               </svg>
             </span>
             <span class="pc-mtext">Tag</span></a>
-        </li>
+        </li> -->
         <?php endif; ?>
 
         <?php if ($role == 1) : ?>
