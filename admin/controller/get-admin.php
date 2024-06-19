@@ -3,7 +3,7 @@ require '../function/init.php';
 
 header('Content-Type: application/json');
 
-$sql = 'SELECT id_admin, nama, email, password FROM admin';
+$sql = 'SELECT id_admin, nama, email, password, role FROM admin';
 $result = $conn->query($sql);
 
 $data = [];

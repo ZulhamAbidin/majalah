@@ -1,21 +1,7 @@
-
-<!-- 
-<form role="form" method="POST">
-
-  <input type="text" class="form-control form-control-lg" placeholder="Email" aria-label="Email" name="email">
-
-  <input type="password" name="password" class="form-control form-control-lg" placeholder="Password"
-    aria-label="Password">
-
-  <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Masuk</button>
-
-</form>
- -->
-
 <?php 
 require 'function/init.php';
 
-if (requestMethod() == "POST" )  {
+if (requestMethod() == "POST") {
 
   $data = validate(["email", "password"]);
 
@@ -28,21 +14,26 @@ if (requestMethod() == "POST" )  {
 
     if ($user) {
       $_SESSION[KEY]["login"] = $user;
-      direct("index.php");
-      die;
+
+      // Check user's role and redirect accordingly
+      if ($user['role'] == 1) {
+        direct("index.php");
+      } elseif ($user['role'] == 0) {
+        direct("berita.php");
+      }
+      
+      die; // Ensure script stops execution after redirection
     } else {
       setError("Username atau Password Salah!");      
     }
     
   } else {
-
     setError("Username atau Password Tidak Boleh Kosong!");
-
   }
-
 }
 
 ?>
+
 
 <!doctype html>
 <html lang="en">

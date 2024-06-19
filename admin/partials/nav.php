@@ -1,6 +1,8 @@
 <?php 
 global $hal;
+$role = $_SESSION[KEY]["login"]["role"];
  ?>
+
 
 <header class="pc-header">
   <div class="header-wrapper">
@@ -53,40 +55,7 @@ global $hal;
             </a>
           </div>
         </li>
-        <li class="dropdown pc-h-item header-user-profile">
-          <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button"
-            aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
-            <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar" />
-          </a>
-          <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
-            <div class="dropdown-header d-flex align-items-center justify-content-between">
-              <h5 class="m-0">Profile</h5>
-            </div>
-            <div class="dropdown-body">
-              <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
-                <div class="d-flex mb-1">
-                  <div class="flex-shrink-0">
-                    <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35" />
-                  </div>
-                  <div class="flex-grow-1 ms-3">
-                    <h6 class="mb-1"><?= $_SESSION[KEY]["login"]["nama"] ?> 🖖</h6>
-                    <span><a href="../../../../external.html?link=https://ableproadmin.com/cdn-cgi/l/email-protection"
-                        class="__cf_email__"
-                        data-cfemail="482b293a3b2726662c293a3a2126082b272538292631662127"><?= $_SESSION[KEY]["login"]["email"] ?></a></span>
-                  </div>
-                </div>
-                <hr class="border-secondary border-opacity-50" />
-                <div class="d-grid mb-3">
-                  <button class="btn btn-primary">
-                    <svg class="pc-icon me-2">
-                      <use xlink:href="#custom-logout-1-outline"></use>
-                    </svg>Logout
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
+        
       </ul>
     </div>
 

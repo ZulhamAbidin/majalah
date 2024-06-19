@@ -24,8 +24,7 @@ if ($berita) {
         echo '<div class="col-md-6 col-lg-4">
                 <div class="card">
                     <div class="card-body mt-2">
-                        <h5 class="mb-3">' . $item['judul'] . '</h5>
-                        <p class="text-muted">' . substr($item['isi'], 0, 150) . '</p>
+                        <h5 class="mb-3 text-center">' . $item['judul'] . '</h5>
                         <img class="pt-2" alt="image" src="admin/assets/img/' . $item['gambar'] . '" width="100%">
                         <a class="btn btn-light-dark mt-3" href="detail.php?id=' . $item['id_berita'] . '">Lihat Detail Berita <i class="ti ti-external-link"></i></a>
                     </div>

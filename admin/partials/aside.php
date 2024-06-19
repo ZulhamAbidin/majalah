@@ -1,10 +1,11 @@
 <?php 
 global $hal;
+$role = $_SESSION[KEY]["login"]["role"];
  ?>
 
 
- <!-- [ Sidebar Menu ] start -->
- <nav class="pc-sidebar">
+<!-- [ Sidebar Menu ] start -->
+<nav class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
       <a href="#" class="b-brand text-primary">
@@ -18,11 +19,20 @@ global $hal;
         <div class="card-body">
           <div class="d-flex align-items-center">
             <div class="flex-shrink-0">
+            <?php if ($role == 1) : ?>
               <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar wid-45 rounded-circle" />
+              <?php elseif ($role == 0) : ?>
+                <img src="../assets/images/user/avatar-3.jpg" alt="user-image" class="user-avtar wid-45 rounded-circle" />
+              <?php endif; ?>
+              
             </div>
             <div class="flex-grow-1 ms-3 me-2">
               <h6 class="mb-0"><?= $_SESSION[KEY]["login"]["nama"] ?></h6>
-              <small>Administrator</small>
+              <?php if ($role == 1) : ?>
+                <small class="fw-semibold">Administrator</small>
+              <?php elseif ($role == 0) : ?>
+                <small class="fw-semibold">Jurnalis</small>
+              <?php endif; ?>
             </div>
             <a class="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
               <svg class="pc-icon">
@@ -43,11 +53,11 @@ global $hal;
 
       <ul class="pc-navbar">
 
-        
+
         <li class="pc-item pc-caption">
           <label>Navigation</label>
         </li>
-        
+        <?php if ($role == 1) : ?>
         <li class="pc-item <?= $hal == "Dashboard" ? "active" : "" ?>"><a href="index.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -56,7 +66,9 @@ global $hal;
             </span>
             <span class="pc-mtext">Dashboard</span></a>
         </li>
+        <?php endif; ?>
 
+        <?php if ($role == 0 || $role == 1) : ?>
         <li class="pc-item <?= $hal == "Data Kategori" ? "active" : "" ?>"><a href="kategori.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -65,7 +77,9 @@ global $hal;
             </span>
             <span class="pc-mtext">Kategori</span></a>
         </li>
+        <?php endif; ?>
 
+        <?php if ($role == 1) : ?>
         <li class="pc-item <?= $hal == "Data Tag" ? "active" : "" ?>"><a href="tag.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -74,7 +88,9 @@ global $hal;
             </span>
             <span class="pc-mtext">Tag</span></a>
         </li>
+        <?php endif; ?>
 
+        <?php if ($role == 1) : ?>
         <li class="pc-item <?= $hal == "Majalah" ? "active" : "" ?>"><a href="majalah.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -83,7 +99,9 @@ global $hal;
             </span>
             <span class="pc-mtext">Majalah</span></a>
         </li>
+        <?php endif; ?>
 
+        <?php if ($role == 1) : ?>
         <li class="pc-item <?= $hal == "sch" ? "active" : "" ?>"><a href="schedules.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -92,7 +110,9 @@ global $hal;
             </span>
             <span class="pc-mtext">Schedules</span></a>
         </li>
+        <?php endif; ?>
 
+        <?php if ($role == 1) : ?>
         <li class="pc-item  <?= $hal == "Penjualan" ? "active" : "" ?>"><a href="penjualan.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -101,7 +121,9 @@ global $hal;
             </span>
             <span class="pc-mtext">Penjualan</span></a>
         </li>
+        <?php endif; ?>
 
+        <?php if ($role == 0 || $role == 1) : ?>
         <li class="pc-item <?= $hal == "Berita" ? "active" : "" ?>"><a href="berita.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -110,7 +132,9 @@ global $hal;
             </span>
             <span class="pc-mtext">Berita</span></a>
         </li>
+        <?php endif; ?>
 
+        <?php if ($role == 1) : ?>
         <li class="pc-item <?= $hal == "Data Admin" ? "active" : "" ?>"><a href="admin.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -119,7 +143,9 @@ global $hal;
             </span>
             <span class="pc-mtext">Data Admin</span></a>
         </li>
+        <?php endif; ?>
 
+        <?php if ($role == 0 || $role == 1) : ?>
         <li class="pc-item"><a href="logout.php" class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon">
@@ -128,6 +154,7 @@ global $hal;
             </span>
             <span class="pc-mtext">Logout</span></a>
         </li>
+        <?php endif; ?>
 
       </ul>
     </div>

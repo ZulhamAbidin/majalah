@@ -65,6 +65,7 @@ $hal = "Data Admin";
 											<th>No.</th>
 											<th>Nama</th>
 											<th>Email</th>
+											<th>Role</th>
 											<th>Password</th>
 											<th style="width: 150px">Aksi</th>
 										</tr>
@@ -85,101 +86,111 @@ $hal = "Data Admin";
 
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js">	</script>
-		<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-		<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script>
-			$(document).ready(function () {
-				var table = $('#datas').DataTable({
-					"processing": true,
-					"serverSide": false,
-					"ajax": {
-						"url": "controller/get-admin.php",
-						"type": "GET",
-						"dataSrc": "data"
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"> </script>
+	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		$(document).ready(function () {
+			var table = $('#datas').DataTable({
+				"processing": true,
+				"serverSide": false,
+				"ajax": {
+					"url": "controller/get-admin.php",
+					"type": "GET",
+					"dataSrc": "data"
+				},
+				"columns": [{
+						"data": "id_admin"
 					},
-					"columns": [{
-							"data": "id_admin"
-						},
-						{
-							"data": "nama"
-						},
-						{
-							"data": "email"
-						},
-						{
-							"data": "password"
-						},
-						{
-							"data": null,
-							"render": function (data, type, row) {
-								return '<a href="admin-edit.php?id=' + row.id_admin +
-									'" class="btn btn-primary">Edit</a> ' +
-									'<button class="btn btn-danger btn-delete" data-id="' + row
-									.id_admin + '">Delete</button>';
-							}
+					{
+						"data": "nama"
+					},
+					{
+						"data": "email"
+					},
+					{
+						"data": "role",
+						"title": "Role",
+						"render": function (data, type, row) {
+							// Menggunakan kondisi untuk mengganti nilai berdasarkan role
+							var roleText = (data == 1) ? "administrator" : "jurnalis";
+							var className = (data == 1) ? "text-administrator" : "text-jurnalis";
+							return '<span class="fw-bold' + className + '">' + roleText + '</span>';
 						}
-					],
-					"language": {
-						"emptyTable": "Belum ada data.",
-						"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-						"infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
-						"infoFiltered": "(disaring dari total _MAX_ entri)",
-						"lengthMenu": "Tampilkan _MENU_ entri",
-						"loadingRecords": "Memuat...",
-						"processing": "Sedang memproses...",
-						"search": "Cari:",
-						"zeroRecords": "Tidak ada data yang cocok ditemukan"
+					},
+					{
+						"data": "password"
+					},
+					{
+						"data": null,
+						"render": function (data, type, row) {
+							return '<a href="admin-edit.php?id=' + row.id_admin +
+								'" class="btn btn-primary">Edit</a> ' +
+								'<button class="btn btn-danger btn-delete" data-id="' + row
+								.id_admin + '">Delete</button>';
+						}
+					}
+				],
+				"language": {
+					"emptyTable": "Belum ada data.",
+					"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+					"infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+					"infoFiltered": "(disaring dari total _MAX_ entri)",
+					"lengthMenu": "Tampilkan _MENU_ entri",
+					"loadingRecords": "Memuat...",
+					"processing": "Sedang memproses...",
+					"search": "Cari:",
+					"zeroRecords": "Tidak ada data yang cocok ditemukan"
+				}
+			});
+
+			$('#datas').on('click', '.btn-delete', function () {
+				var id = $(this).data('id');
+
+				Swal.fire({
+					title: 'Apakah Anda yakin?',
+					text: "Data ini tidak dapat dikembalikan!",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya, hapus!'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url: 'controller/delete-admin.php',
+							type: 'POST',
+							data: {
+								id_admin: id
+							},
+							success: function (response) {
+								Swal.fire(
+									'Dihapus!',
+									'Data admin telah dihapus.',
+									'success'
+								);
+								table.ajax.reload();
+							},
+							error: function (xhr, status, error) {
+								Swal.fire(
+									'Error!',
+									'Terdapat kesalahan saat menghapus data.',
+									'error'
+								);
+							}
+						});
 					}
 				});
-
-				$('#datas').on('click', '.btn-delete', function () {
-					var id = $(this).data('id');
-
-					Swal.fire({
-						title: 'Apakah Anda yakin?',
-						text: "Data ini tidak dapat dikembalikan!",
-						icon: 'warning',
-						showCancelButton: true,
-						confirmButtonColor: '#3085d6',
-						cancelButtonColor: '#d33',
-						confirmButtonText: 'Ya, hapus!'
-					}).then((result) => {
-						if (result.isConfirmed) {
-							$.ajax({
-								url: 'controller/delete-admin.php',
-								type: 'POST',
-								data: {
-									id_admin: id
-								},
-								success: function (response) {
-									Swal.fire(
-										'Dihapus!',
-										'Data admin telah dihapus.',
-										'success'
-									);
-									table.ajax.reload();
-								},
-								error: function (xhr, status, error) {
-									Swal.fire(
-										'Error!',
-										'Terdapat kesalahan saat menghapus data.',
-										'error'
-									);
-								}
-							});
-						}
-					});
-				});
-
-				 var toastEl = document.querySelector('.toast');
-            if (toastEl) {
-                var toast = new bootstrap.Toast(toastEl);
-                toast.show();
-            }
 			});
-		</script>
+
+			var toastEl = document.querySelector('.toast');
+			if (toastEl) {
+				var toast = new bootstrap.Toast(toastEl);
+				toast.show();
+			}
+		});
+	</script>
 
 	<?php partials("footer.php") ?>
 	<?php partials("end.php") ?>

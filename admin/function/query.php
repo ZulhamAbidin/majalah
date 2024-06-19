@@ -2,6 +2,7 @@
 
 use function PHPSTORM_META\type;
 
+
 function query_select($table, $role = [])
 {
   global $conn;

@@ -30,10 +30,10 @@ if ($majalah) {
                     </div>
                     <div class="card-body">
                         <a href="majalah-detail.php?id=' . $item['id_majalah'] . '">
-                            <p class="prod-content mb-0 text-muted">' . $item['judul'] . '</p>
+                            <p class="prod-content mb-0 text-muted text-center fw-semibold">' . $item['judul'] . '</p>
                         </a>
-                        <div class="d-flex align-items-center justify-content-between mt-2">
-                            <h4 class="mb-0 text-truncate">Edisi <b>' . $item['edisi'] . '</b></h4>
+                        <div class=" mt-2">
+                            <h4 class="mb-0 text-truncate text-center">Edisi <b>' . $item['edisi'] . '</b></h4>
                         </div>
                     </div>
                 </div>

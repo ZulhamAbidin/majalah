@@ -113,6 +113,18 @@ if ($result && $result->num_rows > 0) {
 <?php require 'Comp/header.php'; ?>
 <?php require 'Comp/navbar.php'; ?>
 
+
+<style>
+		.majalah-column {
+			max-width: 210px !important;
+			padding: 10px !important;
+			white-space: normal !important;
+			word-break: break-word !important;
+			overflow-wrap: break-word !important;
+		}
+	</style>
+
+
 <div class="container mt-4">
     <div class="card">
         <div class="card-body">
@@ -121,7 +133,7 @@ if ($result && $result->num_rows > 0) {
                     <div class="row align-items-center g-3">
                         <div class="col-sm-6">
                             <div class="d-flex align-items-center mb-2">
-                                <img src="assets/images/logo-dark.svg" class="img-fluid" alt="images">
+                                <img src="assets/images/logo-dark.png" class="img-fluid" alt="images">
                                 <?php if ($row['status_pembayaran'] == 3) : ?>
                                     <span class="badge bg-danger rounded-pill ms-2">Belum Dibayar</span>
                                 <?php elseif ($row['status_pembayaran'] == 1) : ?>
@@ -155,7 +167,7 @@ if ($result && $result->num_rows > 0) {
                                 <tr>
                                     <td>x</td>
                                     <td><?= $row['nama'] ?></td>
-                                    <td><?= $row['judul'] ?> <span class="fw-semibold"> Edisi <?= $row['edisi'] ?></span></td>
+                                    <td class="majalah-column"><?= $row['judul'] ?> <span class="fw-semibold"> Edisi <?= $row['edisi'] ?></span></td>
                                     <td><?= $paket_pembelian ?></td>
                                     <td><?= $row['metode_pembayaran'] ?></td>
                                     <td><?= $status_pembayaran ?></td>

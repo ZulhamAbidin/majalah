@@ -39,7 +39,7 @@ $majalah = query_select('majalah', ["orderby" => "id_majalah DESC", "limit" => "
       <div class="col-md-6 col-lg-4">
         <div class="card">
           <div class="card-body mt-2">
-            <h5 class="mb-3"><?= $item['judul'] ?></h5>
+            <h5 class="mb-3 text-center"><?= $item['judul'] ?></h5>
             <p class="text-muted">
             </p><img class="pt-2" alt="image" src="admin/assets/img/<?= $item['gambar'] ?>" width="100%">
             <a class="btn btn-primary mt-3" href="detail.php?id=<?= $item['id_berita'] ?>">Lihat Detail Berita <i
@@ -96,7 +96,7 @@ $majalah = query_select('majalah', ["orderby" => "id_majalah DESC", "limit" => "
           <div class="card-body">
 
             <a href="majalah-detail.php?id=<?= $item["id_majalah"] ?>">
-              <p class="prod-content mb-0 text-muted"><?= $item['judul'] ?></p>
+              <p class="prod-content mb-0 text-muted text-center"><?= $item['judul'] ?></p>
             </a>
 
             <div class="d-flex align-items-center justify-content-between mt-2">

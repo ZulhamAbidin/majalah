@@ -25,19 +25,19 @@ if ($isLoggedIn) {
 <div class="container">
 <div class="card shadow-sm border-0 mt-4 mb-5">
       <div class="card-body p-5">
-        <h2 class="mb-4 mt-3">Majalah <?= $majalah["judul"] ?></h2>
+        <h2 class="mb-4 mt-3 text-center">Majalah <?= $majalah["judul"] ?></h2>
         <center>
           <img src="admin/assets/img/<?= $majalah['cover'] ?>" class="mb-4" alt="" style="width: 100%;">
         </center>
-        <p>Edisi : <?= $majalah["edisi"] ?></p>
+        <p class="fw-bold">Edisi : <?= $majalah["edisi"] ?></p>
         <p><?= $majalah["desk"] ?></p>
         
         <?php if ($isLoggedIn && !$hasPurchased): ?>
-          <a href="majalah-beli.php?id=<?= $id ?>" class="btn btn-sm btn-warning text-white">Beli Majalah</a>
+          <a href="majalah-beli.php?id=<?= $id ?>" class="btn btn-block btn-warning text-white">Beli Majalah</a>
         <?php elseif (!$isLoggedIn): ?>
-          <a href="login.php" class="btn btn-sm btn-warning text-white">Login untuk Membeli</a>
+          <a href="login.php" class="btn btn-block btn-warning text-white">Login untuk Membeli</a>
         <?php else: ?>
-          <a href="majalah-anda.php" class=" btn btn-sm btn-primary ">Anda sudah membeli majalah ini, Lihat Majalah Saya</a>
+          <a href="majalah-anda.php" class=" btn btn-block btn-primary">Anda sudah membeli majalah ini, Lihat Majalah Saya</a>
         <?php endif; ?>
       </div>
     </div>
