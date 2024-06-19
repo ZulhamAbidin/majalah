@@ -26,14 +26,14 @@ $hal = "Majalah";
 <?php partials("head.php") ?>
 
 <style>
-    .judul-col {
-        min-width: 150px !important; /* Set minimum width */
-        max-width: 300px !important; /* Set maximum width */
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important; /* Add ellipsis if the text overflows */
-    }
-</style>
+		.majalah-column {
+			max-width: 200px !important;
+			padding: 10px !important;
+			white-space: normal !important;
+			word-break: break-word !important;
+			overflow-wrap: break-word !important;
+		}
+	</style>
 
 
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast=""
@@ -126,7 +126,7 @@ $hal = "Majalah";
 					},
 					"columns": [
                 { "data": "id_majalah" },
-                { "data": "judul", "className": "judul-col" },
+                { "data": "judul", "className": "majalah-column" },
                 { "data": "edisi" },
                 {
                     "data": "harga_digital",

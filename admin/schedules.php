@@ -116,11 +116,11 @@ $hal = "sch";
                         "data": null,
                         "render": function (data, type, row) {
                             return '<a href="schedules-edit.php?id=' + row.id_schedules +
-                                '" class="btn btn-primary">Edit</a> ' +
-                                '<button class="btn btn-danger btn-delete" data-id="' + row.id_schedules +
-                                '">Delete</button> ' +
+                                '" class="btn mt-2 block btn-primary">Edit</a> <br>' +
+                                '<button class="btn mt-2 block btn-danger btn-delete" data-id="' + row.id_schedules +
+                                '">Delete</button> <br>' +
                                 '<a href="schedules-detail.php?id=' + row.id_schedules +
-                                '" class="btn btn-info">Detail</a>';
+                                '" class="btn mt-2 block btn-info">Detail</a>';
                         }
                     }
                 ],

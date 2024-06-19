@@ -1,5 +1,3 @@
-<!-- ini adalah berita-add.php -->
-
 <?php 
 require_once "function/init.php";
 
@@ -10,7 +8,6 @@ if (!isset($_SESSION[KEY]["login"])) {
 
 if (requestMethod() == "POST" )  {
 
-	// $data = validate(["judul", "isi"]);
   $data = validate(["judul", "isi", "penulis", "tanggal_publish", "id_kategori"]);
 
 	if ($data && File::has("gambar")) {
@@ -41,65 +38,84 @@ if (requestMethod() == "POST" )  {
 $hal = "Berita";
  ?>
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <?php partials("head.php") ?>
 
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast=""
+  data-pc-theme="light">
 
-<body class="g-sidenav-show   bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <div class="loader-bg">
+    <div class="loader-track">
+      <div class="loader-fill"></div>
+    </div>
+  </div>
 
   <?php partials("aside.php") ?>
-  
-  <main class="main-content position-relative border-radius-lg ">
+  <?php partials("nav.php") ?>
 
-    <!-- Navbar -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-    <?php partials("nav.php") ?>  
-    <!-- End Navbar -->
+  <div class="pc-container">
+    <div class="pc-content">
 
-    <div class="container-fluid py-4">
-      <div class="row mt-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
-          <div class="card " style="min-height: 70vh">
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0)">Berita</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0)">Tambah</a></li>
+              </ul>
+            </div>
+            <div class="col-md-12">
+              <div class="page-header-title">
+                <h2 class="mb-0">Berita Tambah</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+
+        <div class="col-sm-12">
+          <div class="card">
+
             <div class="card-body">
 
+              <?php alert(); ?>
 
-            	<div class="d-flex justify-content-between">
-	              <h6 class="mb-2">Berita Baru</h6>
-            		<a href="berita.php" class="btn btn-sm bg-gradient-secondary">Kembali</a>
-            	</div>
+              <form role="form" method="POST" enctype="multipart/form-data">
+                <div class="row">
 
-            	<?php alert(); ?>
+                  <div class="mb-3 mt-2 col-12">
+                    <label class="mb-2" for="">Judul</label>
+                    <input type="text" value="" class="form-control" placeholder="Judul" name="judul">
+                  </div>
 
-            	 <form role="form" method="POST" enctype="multipart/form-data">
-              <div class="row">
+                  <div class="mb-3 mt-2 col-4">
+                    <label class="mb-2" for="">Gambar</label>
+                    <input type="file" value="" class="form-control" placeholder="gambar" name="gambar">
+                  </div>
 
-                <div class="mb-3 col-4">
-                	<label for="">Judul</label>
-                  <input type="text" value="" class="form-control" placeholder="Judul" name="judul">
-                </div>
+                  <div class="mb-3 mt-2 col-4">
+                    <label class="mb-2" for="">Penulis</label>
+                    <input type="text" value="" class="form-control" placeholder="penulis" name="penulis">
+                  </div>
 
-                <div class="mb-3 col-4">
-                  <label for="">Gambar</label>
-                  <input type="file" value="" class="form-control" placeholder="gambar" name="gambar">
-                </div>
+                  <div class="mb-3 mt-2 col-4">
+                    <label class="mb-2" for="tanggal_publish">Tanggal Publish</label>
+                    <input type="datetime-local" class="form-control" id="tanggal_publish" name="tanggal_publish">
+                  </div>
 
-                <div class="mb-3 col-4">
-                	<label for="">penulis</label>
-                  <input type="text" value="" class="form-control" placeholder="penulis" name="penulis">
-                </div>
-
-                <div class="mb-3 col-6">
-                	<label for="tanggal_publish">tanggal publish</label>
-                  <input type="datetime-local" class="form-control" id="tanggal_publish" name="tanggal_publish">
-                </div>
-
-                <!-- berita add dalam menampilkan list kategori -->
-                <div class="mb-3 col-6">
-                  <label for="id_kategori">Kategori</label>
-                  <select class="form-control" id="id_kategori" name="id_kategori">
+                  <div class="mb-3 mt-2 col-12">
+                    <label class="mb-2" for="id_kategori">Kategori</label>
+                    <select class="form-control" id="id_kategori" name="id_kategori">
                       <?php
                     
                       $sql = "SELECT id_kategori, nama FROM kategori";
@@ -113,44 +129,48 @@ $hal = "Berita";
                           echo "<option value=''>Tidak ada kategori tersedia</option>";
                       }
                       ?>
-                  </select>
-                </div>
+                    </select>
+                  </div>
 
-                <div class="mb-3 col-12">
-                <label for="id_kategori">isi</label>
-                  <textarea class="form-control mb-3" name="isi" rows="4" cols="5" id="editor"><?= old("isi") ?></textarea>
-                </div>
+                  <div class="mb-3 mt-2 col-12">
+                    <label class="mb-2" for="isi">Isi</label>
+                    <textarea class="form-control mb-3" name="isi" id="editor"><?= old("isi") ?></textarea>
+                  </div>
 
+                  <div class="text-end mt-4">
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                  </div>
 
-                <script>
-                    ClassicEditor
-                        .create( document.querySelector( '#editor' ) )
-                        .catch( error => {
-                            console.error( error );
-                        } );
-                </script>
-               
-                <div class="text-left mt-4">
-                  <button type="submit" class="btn bg-gradient-primary btn-sm">Tambah</button>
-                </div>
                 </div>
               </form>
 
-	            
-            	
             </div>
           </div>
         </div>
-        
+
       </div>
 
-      <?php partials("footer.php") ?>  
-
     </div>
+  </div>
 
-  </main>
-  
-  <?php partials("end.php") ?>  
+  <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+  <script src="assets/js/plugins/ckeditor/classic/ckeditor.js"></script>
+
+  <script>
+    ClassicEditor
+      .create(document.querySelector('#editor'))
+      .then(editor => {
+        console.log(editor);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
+
+  <?php partials("footer.php") ?>
+  <?php partials("end.php") ?>
+
 </body>
 
 </html>

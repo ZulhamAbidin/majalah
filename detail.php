@@ -31,9 +31,10 @@ $berita = query_select("berita", ["where" => "id_berita = '$id'"])[0];
             </div>
 
             <div class="col-md-6"><span class="badge bg-success f-14">Berita </span>
-              <h5 class="my-3"><?= $berita["judul"] ?></h5>
-              <h5 class="mt-4 mb-3">Penulis <?= $berita["penulis"] ?>  <?= formatTanggal($berita["tanggal_publish"]) ?></h5>
+              <h1 class="my-3 text-center"><?= $berita["judul"] ?></h1>
+              <h5 class="mt-4 mb-3 text-center">Penulis <?= $berita["penulis"] ?> </h5>
               <p><?= $berita["isi"] ?></p>
+              <?= formatTanggal($berita["tanggal_publish"]) ?>
             </div>
 
           </div>

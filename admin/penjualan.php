@@ -22,7 +22,7 @@ $hal = "Penjualan";
 		</div>
 	</div>
 
-	<!-- <style>
+	<style>
 		.majalah-column {
 			max-width: 200px !important;
 			padding: 10px !important;
@@ -30,7 +30,7 @@ $hal = "Penjualan";
 			word-break: break-word !important;
 			overflow-wrap: break-word !important;
 		}
-	</style> -->
+	</style>
 
 	<?php partials("aside.php") ?>
 	<?php partials("nav.php") ?>
@@ -82,7 +82,6 @@ $hal = "Penjualan";
 										<tr>
 											<th>No.</th>
 											<th>Subscriber</th>
-											<th width="50%">Metode <br> Pembayaran</th>
 											<th>Majalah</th>
 											<th>Harga</th>
 											<th>Status</th>
@@ -127,28 +126,24 @@ $hal = "Penjualan";
 						"title": "Subscriber"
 					},
 					{
-						"data": "metode_pembayaran",
-						"title": ""
-					},
-					{
 						"data": "judul_majalah",
 						"title": "Majalah",
 						"className": "majalah-column"
 					},
 					{
-    "data": null,
-    "title": "Harga & Metode Pembayaran",
-    "render": function (data, type, row) {
-        var harga = new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(row.harga);
+						"data": null,
+						"title": "Harga",
+						"render": function (data, type, row) {
+							var harga = new Intl.NumberFormat('id-ID', {
+								style: 'currency',
+								currency: 'IDR',
+								minimumFractionDigits: 0,
+								maximumFractionDigits: 0
+							}).format(row.harga);
 
-        return `${harga} - ${row.metode_pembayaran}`;
-    }
-},
+							return `${harga} - ${row.metode_pembayaran}`;
+						}
+					},
 					{
 						"data": "status_pembayaran",
 						"title": "Status Pembayaran",

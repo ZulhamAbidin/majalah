@@ -41,7 +41,6 @@ $majalah = query_select('majalah', ["orderby" => "id_majalah DESC", "limit" => "
           <div class="card-body mt-2">
             <h5 class="mb-3"><?= $item['judul'] ?></h5>
             <p class="text-muted">
-              <p class="mb-0"><?= substr($item['isi'], 0, 150) ?></p>
             </p><img class="pt-2" alt="image" src="admin/assets/img/<?= $item['gambar'] ?>" width="100%">
             <a class="btn btn-primary mt-3" href="detail.php?id=<?= $item['id_berita'] ?>">Lihat Detail Berita <i
                 class="ti ti-external-link"></i></a>
