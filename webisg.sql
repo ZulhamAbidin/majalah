@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 17, 2024 at 06:31 PM
+-- Generation Time: Jun 19, 2024 at 07:45 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.16
 
@@ -31,15 +31,17 @@ CREATE TABLE `admin` (
   `id_admin` int NOT NULL,
   `nama` varchar(100) NOT NULL DEFAULT '0',
   `password` varchar(50) NOT NULL DEFAULT '0',
-  `email` varchar(50) NOT NULL DEFAULT '0'
+  `email` varchar(50) NOT NULL DEFAULT '0',
+  `role` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id_admin`, `nama`, `password`, `email`) VALUES
-(2, 'admin', 'admin', 'admin@gmail.com');
+INSERT INTO `admin` (`id_admin`, `nama`, `password`, `email`, `role`) VALUES
+(1, 'jurnalisa', 'jurnalisa', 'jurnalisa@gmail.com', 0),
+(2, 'admin', 'admin', 'admin@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -62,8 +64,8 @@ CREATE TABLE `berita` (
 --
 
 INSERT INTO `berita` (`id_berita`, `judul`, `gambar`, `isi`, `penulis`, `tanggal_publish`, `id_kategori`) VALUES
-(1, 'Sejarah Singkat Kepulauan Selayar', '1718462637UgSnWJSFR7.png', '\n      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil qui saepe tenetur consequuntur quaerat in, aliquid commodi voluptatem tempore, ratione placeat optio quisquam porro delectus quam cupiditate quasi impedit veniam', 'edit', '2024-06-15 21:43:00', 1),
-(2, 'aaaaaaa', '1718462637UgSnWJSFR7.png', '      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil qui saepe tenetur consequuntur quaerat in, aliquid commodi voluptatem tempore, ratione placeat optio quisquam porro delectus quam cupiditate quasi impedit veniam', 'edit', '2024-06-15 21:43:00', 2);
+(5, 'PENDAFTARAN TELAH DIBUKA KEMBALI!!!', '1718813030SSGrL8yYgd.jpg', '<p><strong>Loremasdasda</strong></p><p>&nbsp;</p><p>&nbsp;</p><p><strong>asdasdasd</strong></p><p><strong>asd</strong></p><figure class=\"table\"><table><tbody><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></figure>', 'Annisa Septiani Kamal', '2024-06-20 00:02:00', 22),
+(6, 'JHKJH', '1718814899YbA7TGnpd6.jpg', '<p>ASDASDASD</p><p>&nbsp;</p><p><strong>ASDASDASD</strong></p><p>&nbsp;</p><p>DASASDASDAS</p><p><strong>ASDASDAS</strong></p>', 'annisa', '2024-06-20 00:34:00', 21);
 
 -- --------------------------------------------------------
 
@@ -81,8 +83,9 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama`) VALUES
-(1, 'kategori 1'),
-(2, 'kategori 2');
+(21, 'sdfsdfasdasd'),
+(22, 'asdasdasd'),
+(23, 'dffsfsdf');
 
 -- --------------------------------------------------------
 
@@ -107,9 +110,10 @@ CREATE TABLE `majalah` (
 --
 
 INSERT INTO `majalah` (`id_majalah`, `judul`, `edisi`, `desk`, `isi`, `cover`, `harga_digital`, `harga_cetak`, `harga_keduanya`) VALUES
-(5, 'Sejarah Singkat HME FT UNM edit', 'Edisi', 'deksripsi', '1718367380ydjLORvF5e.pdf', '1718367380m0TlUVHrWW.jpg', 120000, 1200000, 11200000),
-(6, 'Sejarah Singkat PINISI CHOIR', '1', '\n                Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit delectus rerum nisi, assumenda soluta illo facere eligendi quidem voluptas error ipsum sapiente perferendis quis tenetur doloribus, neque quam iusto, adipisci inventore voluptate perspiciatis. Voluptatibus dolorum quo modi unde, quae, ea earum error, nobis iure itaque doloremque. Fugit qui ut dolorum, a consectetur consequatur amet laborum libero in voluptates officia perspiciatis aliquam architecto vel corrupti doloremque incidunt voluptatibus. Nobis quas aut delectus dignissimos. Sunt iusto aspernatur impedit reprehenderit id nemo voluptatibus repudiandae quas similique maxime, eius in explicabo blanditiis minus nam harum obcaecati dolorem facilis! Doloribus nobis id voluptatum eum dolorem amet quidem eligendi doloremque deleniti! Minima tempora est voluptatibus incidunt placeat voluptates atque veniam qui sunt dolor, suscipit rem eligendi ipsum porro, molestiae doloribus reprehenderit corporis deserunt cumque quod obcaecati laudantium quibusdam. Ipsa, praesentium tenetur cum voluptatem tempore rem autem enim debitis amet nihil magni quas, beatae quis perferendis consequuntur.', '17184387043Ni3qxN8Hh.pdf', '1718438704lzOs50vUxr.jpg', 20000, 200000, 2000000),
-(7, 'Pengambangan Sistem E-Document Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja Disnaker Kota Makassar Berbasis Website ', '1', '12', '1718438727JvRVDf339u.pdf', '1718438727IUsrVPYWMQ.jpg', 1, 2, 1);
+(32, 'Sejarah Singkat PINISI CHOIR', '1', 'lorem', '1718803981ItCFaEWqcp.pdf', 'a.jpg', 10000, 100000, 1000000),
+(33, 'Pengambangan Sistem E-Document Penempatan Tenaga Kerja Dan Perluasan Kesempatan Kerja Disnaker Kota Makassar Berbasis Website ', '1', 'lorem', '1718803981ItCFaEWqcp.pdf', 'a.jpg', 290000, 2900000, 29000000),
+(35, 'edit', '32', '33', '1718803981ItCFaEWqcp.pdf', 'a.jpg', 23423, 23423, 234),
+(36, 'PENDAFTARAN TELAH DIBUKA KEMBALI!!!', '1', 'lorem', '1718805070Da8s2xGynN.pdf', '1718805070dAi6eEqhTk.jpg', 10000, 100000, 10000000);
 
 -- --------------------------------------------------------
 
@@ -134,7 +138,8 @@ CREATE TABLE `penjualan` (
 --
 
 INSERT INTO `penjualan` (`id_p`, `id_sub`, `id_majalah`, `harga`, `status_pembayaran`, `bukti_pembayaran`, `tgl_penjualan`, `metode_pembayaran`, `no_transaksi`) VALUES
-(53, 6, 6, 2000000, 2, '1718649008bfV2DoIyG3.png', '2024-06-18', 'BNI', 'BNI-53-18062024-VTWJG066');
+(67, 6, 36, 10000000, 1, '1718826213Ri3kC5tXUF.png', '2024-06-20', 'BNI', 'BNI-67-20062024-IPUDK963'),
+(68, 6, 35, 234, 3, '1718826245fUSO9QRY8t.png', '2024-06-20', 'BCA', 'BCA-68-20062024-RCFOW747');
 
 -- --------------------------------------------------------
 
@@ -165,8 +170,7 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`id_schedules`, `CarrierName`, `VesselName`, `VoyageNumber`, `TradeLine`, `PortCodeOrigin`, `DepartureDate`, `Transhipment`, `TranshipmentDeparture`, `PortCodeDestination`, `ArrivalDate`, `Duration`, `Forwarder`, `BerthingTerminal`, `RequestQuote`) VALUES
-(1, 'andri okitaaz', 'z', 'z', 'z', 'z', '2024-06-15', 'z', '2024-06-15', 'z', '2024-06-15', 0, 'z', 'z', 'zQuote Request'),
-(5, 'andri okita3', 'MV Pelayaran Jaya3', 'V123453', 'Asia-Europe3', 'SGSIN3', '2024-06-15', 'Yes3', '2024-06-15', 'Destination Port3', '2024-06-15', 51, 'Forwarder Company3', 'Terminal A3', 'Quote Request3');
+(7, 'andri okitaaa', 'MV Pelayaran Jaya1', 'V123451', 'Asia-Europe1', 'SGSIN1', '2024-06-19', 'Yes3', '2024-06-19', 'Destination Port3', '2024-06-19', 51, 'Forwarder Company3', 'Terminal A3', 'Quote Request3');
 
 -- --------------------------------------------------------
 
@@ -190,11 +194,9 @@ CREATE TABLE `subscriber` (
 --
 
 INSERT INTO `subscriber` (`id_sub`, `nama`, `alamat`, `email`, `no_telp`, `pic`, `username`, `password`) VALUES
-(3, 'Risa Harahap', 'Jakarta Selatan', 'risa@gmail.com', '12312312', '213123', 'risa', '123'),
-(4, 'ZulhamAbidin', 'BTN NUKI DWIKARYA PERMAI', 'zlhm378@gmail.com', '0895801138822', 'pic zlhm.a', 'pengunjung', 'pengunjung'),
-(5, 'Zulham Abidin, S.Pd., Gr.', 'Universitas Negeri Makassar', 'pengunjungastri@gmail.com', '0895801138822', 'Lorem', 'pengunjungastri', 'pengunjungastri'),
+(4, 'ZulhamAbidin', 'BTN NUKI DWIKARYA PERMAI', 'zlhm378@gmail.com', '0895801138822', 'pic zlhm.a', 'ZulhamAbidin', 'ZulhamAbidin'),
 (6, 'AstriAyuningsih', 'Kota Watansoppeng, Kabupaten Soppeng, Sulawesi Selatan.  ', 'asdastriayu@gmail.com', '34534534534', '0', 'AstriAyuningsih', 'AstriAyuningsih'),
-(7, 'AstriAyuningsih2', 'AstriAyuningsih2', 'astriayuningsih2@gmail.com', '345353', '0', 'AstriAyuningsih2', 'astriayuningsih2');
+(10, 'AnnisaSeptianiKamal', 'AnnisaSeptianiKamal', 'AnnisaSeptianiKamal@gmail.com', '0895801138822', '0', 'AnnisaSeptianiKamal', 'AnnisaSeptianiKamal');
 
 -- --------------------------------------------------------
 
@@ -212,7 +214,9 @@ CREATE TABLE `tag` (
 --
 
 INSERT INTO `tag` (`id_tag`, `nama`) VALUES
-(2, 'tambah tag');
+(7, 'ddf'),
+(8, 'aa'),
+(9, 'tag');
 
 --
 -- Indexes for dumped tables
@@ -275,49 +279,49 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_admin` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `berita`
 --
 ALTER TABLE `berita`
-  MODIFY `id_berita` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_berita` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `majalah`
 --
 ALTER TABLE `majalah`
-  MODIFY `id_majalah` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_majalah` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_p` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_p` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id_schedules` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_schedules` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `subscriber`
 --
 ALTER TABLE `subscriber`
-  MODIFY `id_sub` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_sub` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id_tag` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_tag` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
