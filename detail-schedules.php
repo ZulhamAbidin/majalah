@@ -1,7 +1,7 @@
 <?php
 require 'admin/function/init.php';
 
-$halaman = "Detail Produk";
+$halaman = "Schedules";
 
 $id_schedules = $_GET['id'];
 $sql = 'SELECT * FROM schedules WHERE id_schedules = ?';

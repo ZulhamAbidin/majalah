@@ -1,6 +1,6 @@
 <?php
-$halaman = "Detail Produk";
-require "phpqrcode/qrlib.php";
+$halaman = "Berita";
+// require "phpqrcode/qrlib.php";
 ?>
 <?php require 'comp/header.php'; ?>
 

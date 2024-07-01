@@ -1,5 +1,5 @@
 <?php
-$halaman = "Detail Produk";
+$halaman = "Majalah";
 ?>
 <?php require 'comp/header.php'; ?>
 

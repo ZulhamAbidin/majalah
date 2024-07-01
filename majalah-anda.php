@@ -1,6 +1,6 @@
 <?php
 session_start();
-$halaman = "Majalah Online";
+$halaman = "Majalah";
 require 'Comp/header.php';
 require 'admin/function/init.php';
 

@@ -1,4 +1,4 @@
-<?php $halaman = "Majalah Online" ?>
+<?php $halaman = "Home" ?>
 <?php require 'Comp/header.php'; ?>
 <?php
 

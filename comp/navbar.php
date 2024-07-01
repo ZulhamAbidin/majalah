@@ -25,13 +25,31 @@ if ($current_url === '/webmajalah/schedules.php') {
           <span class="navbar-toggler-icon"></span>
       </button>
 
+      <style>
+    .active {
+        position: relative; /* Required for the pseudo-element to be positioned relative to the parent */
+        color: #3C6DD9 !important;
+    }
+    .active::after {
+        content: ''; 
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 50%;
+        transform: translateX(-50%);
+        border-bottom: 1px solid #3C6DD9 !important;
+    }
+</style>
+
+
+    
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-          <li class="nav-item px-1"><a class="nav-link" href="index.php">Beranda</a></li>
-          <li class="nav-item px-1"><a class="nav-link" href="about.php">About</a></li>
-          <li class="nav-item px-1"><a class="nav-link" href="berita.php">News</a></li>
-          <li class="nav-item px-1"><a class="nav-link" href="schedules.php">Jadwal Pengiriman</a></li>
-          <li class="nav-item px-1"><a class="nav-link" href="majalah.php">Majalah</a></li>
+          <li class="nav-item px-1"><a class="nav-link <?= $halaman == "Home" ? "active" : "" ?>" href="index.php">Beranda</a></li>
+          <li class="nav-item px-1"><a class="nav-link <?= $halaman == "About" ? "active" : "" ?>" href="about.php">About</a></li>
+          <li class="nav-item px-1"><a class="nav-link <?= $halaman == "Berita" ? "active" : "" ?>" href="berita.php">News</a></li>
+          <li class="nav-item px-1"><a class="nav-link <?= $halaman == "Schedules" ? "active" : "" ?>" href="schedules.php">Jadwal Pengiriman</a></li>
+          <li class="nav-item px-1"><a class="nav-link <?= $halaman == "Majalah" ? "active" : "" ?>" href="majalah.php">Majalah</a></li>
 
           <?php if (isset($_SESSION[KEY]['login']) && $_SESSION[KEY]['login']): ?>
           <li class="nav-item">
@@ -90,6 +108,14 @@ if ($current_url === '/webmajalah/schedules.php') {
 
   <?php if ($show_section_landing): ?>
   <br><br>
+
+  <style>
+    @media (max-width: 724px) {
+        .text-white.f-16.mb-0 {
+            padding: 10px; /* Sesuaikan dengan nilai padding yang Anda inginkan */
+        }
+    }
+</style>
                                                   <!-- silahkan ganti menjadi "buku.jpg", "pelabuhan.jpg", "container.jpg"   -->
   <div class="mt-2" style="background-image: url('assets/images/landing/buku.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">  
   <div class="row justify-content-center">

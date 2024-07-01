@@ -26,14 +26,14 @@ $hal = "Majalah";
 <?php partials("head.php") ?>
 
 <style>
-		.majalah-column {
-			max-width: 200px !important;
-			padding: 10px !important;
-			white-space: normal !important;
-			word-break: break-word !important;
-			overflow-wrap: break-word !important;
-		}
-	</style>
+	.majalah-column {
+		max-width: 200px !important;
+		padding: 10px !important;
+		white-space: normal !important;
+		word-break: break-word !important;
+		overflow-wrap: break-word !important;
+	}
+</style>
 
 
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast=""
@@ -125,32 +125,38 @@ $hal = "Majalah";
 						"dataSrc": "data"
 					},
 					"columns": [
-                { "data": "id_majalah" },
-                { "data": "judul", "className": "majalah-column" },
-                { "data": "edisi" },
-                {
-                    "data": "harga_digital",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "harga_cetak",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": "harga_keduanya",
-                    "render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
-                },
-                {
-                    "data": null,
-                    "render": function (data, type, row) {
-                        return '<a href="majalah-detail.php?id=' + row.id_majalah +
-                            '" class="btn btn-info">Detail</a> ' +
-                            '<a href="majalah-edit.php?id=' + row.id_majalah +
-                            '" class="btn btn-primary">Edit</a> ' +
-                            '<button class="btn btn-danger btn-delete" data-id="' + row.id_majalah + '">Delete</button>';
-                    }
-                }
-            ],
+						{ "data": "no" },
+						{
+							"data": "judul",
+							"className": "majalah-column"
+						},
+						{
+							"data": "edisi"
+						},
+						{
+							"data": "harga_digital",
+							"render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+						},
+						{
+							"data": "harga_cetak",
+							"render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+						},
+						{
+							"data": "harga_keduanya",
+							"render": $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+						},
+						{
+							"data": null,
+							"render": function (data, type, row) {
+								return '<a href="majalah-detail.php?id=' + row.id_majalah +
+									'" class="btn btn-info">Detail</a> ' +
+									'<a href="majalah-edit.php?id=' + row.id_majalah +
+									'" class="btn btn-primary">Edit</a> ' +
+									'<button class="btn btn-danger btn-delete" data-id="' + row
+									.id_majalah + '">Delete</button>';
+							}
+						}
+					],
 					"language": {
 						"emptyTable": "Belum ada data.",
 						"info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
